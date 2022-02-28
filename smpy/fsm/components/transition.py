@@ -2,8 +2,26 @@ from action import Action
 from state import State
 
 class Transition:
+    """
+        Represents the transition component of a finite state machine.
+        In transitions actions can be executed.
+    """
+
     def __init__(self, source:State, destination:State, action:Action=None) -> None:
-        pass
+        """
+            Description:
+                Creates a Transition object that changes the current state,
+                from `source` to `destination`.
+
+            Arguments:
+                - source : `State`, state that the transition starts
+                - destination : `State`, state that the transition ends
+                - action : `Action`, it will be executed during the transition
+
+        """
+        self.__source = source
+        self.__destination = destination
+        self.__action = action
 
     def execute(self) -> bool:
         pass
