@@ -1,0 +1,6 @@
+{
+    "actions": {
+        "sum_func": "src/summation.py",
+        "mul_func": "src/multiplication.py"
+    }
+}
