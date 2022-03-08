@@ -16,7 +16,7 @@ class Transition:
             Arguments:
                 - source : `State`, state that the transition starts
                 - destination : `State`, state that the transition ends
-                - action : `Action`, it will be executed during the transition
+                - action : `Action`, action that will be executing during transition
 
         """
         self.__source = source
