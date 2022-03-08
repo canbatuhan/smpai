@@ -1,5 +1,2 @@
-def mul():
+def mul(*args):
     return 2*21
-
-if __name__=="__main__":
-    mul()

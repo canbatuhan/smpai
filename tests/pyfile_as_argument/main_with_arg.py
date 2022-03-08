@@ -1,17 +1,16 @@
-from ast import arg
 import os
-import argparse
+import subprocess
 
-parser = argparse.ArgumentParser()
-parser.add_argument("--f1")
-parser.add_argument("--f2")
+module_name = 'src.summation'
+func_name = 'sum'
 
-args = vars(parser.parse_args())
-sum_func = args['f1']
-mul_func = args['f2']
-
-def run():
-    return os.system('python {}'.format(sum_func)), os.system('python {}'.format(mul_func))
+def generate_command(module_name, func_name, *args):
+    return f"""python -c "from {module_name} import {func_name}; print({func_name}({args}))"""
 
 if __name__=="__main__":
-    print(run())
+    value = subprocess.run(
+        args=generate_command(module_name, func_name),
+        capture_output=True,
+        shell=True,
+        universal_newlines=True
+    ).stdout
