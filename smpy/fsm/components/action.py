@@ -61,11 +61,30 @@ class Action:
         """
         self.__module = action_config.get('module')
         self.__function = action_config.get('function')
-    
-    def execute(self) -> str:
+
+
+    def __str__(self) -> str:
+        """
+            Description:
+                Representation an Action object as string 
+        """
+        return "[Module: {}, Function {}]".format(
+            self.__module, self.__function)
+
+
+    def execute(self, **kwargs) -> str:
+        """
+            Description:
+                Executes the function embedded in action and returns
+                the output value as STRING, for now.
+
+            Arguments:
+                - **kwargs : `dict`, specific arguments with keywords
+        """
         return __run_command(
             __generate_command(
                 module=self.__module,
-                function=self.__function
+                function=self.__function,
+                kwargs=kwargs
             )
         )

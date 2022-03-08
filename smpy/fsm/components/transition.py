@@ -23,6 +23,16 @@ class Transition:
         self.__destination = destination
         self.__action = action
 
+    
+    def __str__(self) -> str:
+        """
+            Description:
+                Representation of a Transation object as string
+        """
+        return "[Source: {}, Destination: {}, Action: {}]".format(
+            self.__source, self.__destination, self.__action)
+
+
     def execute(self) -> bool:
         pass
     

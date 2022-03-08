@@ -22,3 +22,23 @@ class State:
         self.__entry_action = entry_action
         self.__inner_action = inner_action
         self.__exit_action = exit_action
+
+
+    def __str__(self) -> str:
+        """
+            Description:
+                Representation of a State object as string
+        """
+        return "[StateID: {}, EntryAction: {}, InnerAction: {}, ExitAction: {}]".format(
+            self.__state_id, self.__entry_action, self.__inner_action, self.__exit_action)
+
+
+    def get_id(self) -> str:
+        return self.__state_id
+
+    def get_actions(self) -> str:
+        return [
+            self.__entry_action,
+            self.__inner_action,
+            self.__exit_action
+        ]
