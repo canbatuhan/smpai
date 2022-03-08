@@ -1,5 +1,48 @@
-import os
 from typing import Any
+import subprocess
+
+
+def __generate_command(module:str, function:str, **kwargs) -> str:
+    """
+        Description:
+            Generates a one-line python script to run the
+            given function in the given module
+        
+        Arguments:
+            - module : `str`, name of the module
+            - function : `str`, name of the function
+            - kwargs : `dict`, specific arguments with keywords
+
+        Return:
+            - `str` : generated command to run the function
+    """
+    arguments = ""
+    for key, value in kwargs.items():
+        arguments += "{}={},".format(key, value)
+
+    return """python -c "from {} import {}; print({}({}))""".format(
+        module, function, function, kwargs)
+
+
+def __run_command(command:str) -> str:
+    """
+        Description:
+            Runs the command previously generated and
+            capture the output (via. print function used
+            in the generated command)
+
+        Arguments:
+            - command : `str`, previously generated command
+
+        Return:
+            - `str` : captured ouput from command line (can be casted)
+    """
+    return subprocess.run(
+        args=command,
+        capture_output=True,
+        shell=True,
+        universal_newlines=True
+    ).stdout
 
 
 class Action:
@@ -16,11 +59,13 @@ class Action:
             Arguments:
                 - action_config : `dict`, configuration for the action
         """
-        self.__mmodule_name = action_config.get('module')
-        self.__function_name = action_config.get('function')
-
-    def __generate_command():
-        pass
+        self.__module = action_config.get('module')
+        self.__function = action_config.get('function')
     
-    def execute(self) -> Any:
-        pass
+    def execute(self) -> str:
+        return __run_command(
+            __generate_command(
+                module=self.__module,
+                function=self.__function
+            )
+        )

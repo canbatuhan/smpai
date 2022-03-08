@@ -5,8 +5,10 @@ import subprocess
 
 json_file = 'resources/pyfile.json'
 
-def generate_command(module_name, func_name, *args):
-    return f"""python -c "from {module_name} import {func_name}; print({func_name}({args}))"""
+def generate_command(module_name, func_name, **kwargs):
+    arguments = ""
+    for key, value in kwargs.items(): arguments += f"{key}={value},"
+    return f"""python -c "from {module_name} import {func_name}; print({func_name}({arguments}))"""
 
 def run_command(command):
     return float(subprocess.run(
