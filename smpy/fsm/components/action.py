@@ -61,6 +61,7 @@ class Action:
         """
         self.__module = action_config.get('module')
         self.__function = action_config.get('function')
+        self.__arguments = action_config.get('arguments')
 
 
     def __str__(self) -> str:
@@ -72,7 +73,7 @@ class Action:
             self.__module, self.__function)
 
 
-    def execute(self, **kwargs) -> str:
+    def execute(self) -> str:
         """
             Description:
                 Executes the function embedded in action and returns
@@ -85,6 +86,6 @@ class Action:
             __generate_command(
                 module=self.__module,
                 function=self.__function,
-                kwargs=kwargs
+                kwargs=self.__arguments
             )
         )
