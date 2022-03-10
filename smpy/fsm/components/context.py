@@ -1,5 +1,6 @@
 from state import State
 from transition import Transition
+from listener import Listener
 
 class StateMachineContext:
     """
@@ -22,6 +23,7 @@ class StateMachineContext:
         self.__states = set()
         self.__transitions = set()
         self.__actions = set()
+        self.__listener = Listener()
 
     """
         Getters
@@ -53,6 +55,10 @@ class StateMachineContext:
     def get_actions(self) -> set:
         return self.__actions
 
+    def get_listener(self) -> Listener:
+        return self.__listener
+
+
     """
         Setters
     """
@@ -82,3 +88,6 @@ class StateMachineContext:
 
     def set_actions(self, actions:set) -> None:
         self.__actions = actions
+
+    def set_listener(self, listener:Listener) -> None:
+        self.__listener = listener
