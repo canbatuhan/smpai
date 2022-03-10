@@ -39,9 +39,9 @@ class State:
     def get_id(self) -> str:
         return self.__state_id
 
-    def get_actions(self) -> str:
-        return [
-            self.__entry_action,
-            self.__inner_action,
-            self.__exit_action
-        ]
+    def get_actions(self) -> dict:
+        return {
+            'entry_action': self.__entry_action,
+            'inner_action': self.__inner_action,
+            'exit_action': self.__exit_action
+        }

@@ -10,7 +10,7 @@ class Listener():
         It follows what is happening in the state machine.
     """
 
-    def __init__(self, package:str=None, module:str=None, function:str=None) -> None:
+    def __init__(self, package:str=None, module:str=None, function:str=None, params:set=None) -> None:
         """
             Description:
                 Creates a Listener object that runs the given function.
@@ -19,6 +19,7 @@ class Listener():
                 - package : `str`, name of the package
                 - module : `str`, name of the module
                 - function : `str`, name of the function
+                - params : `set`, set of parameters
         """
         self.__action = None
         self.__custom_condition = package==None or module==None or function==None
@@ -28,6 +29,7 @@ class Listener():
                 package=package,
                 module=module,
                 function=function,
+                params=params
             )
 
     
@@ -52,7 +54,7 @@ class Listener():
                     transition.get_destination().get_id()))
 
 
-    def execute(self, transition:Transition, *args) -> None:
+    def execute(self, transition:Transition, **kwargs) -> None:
         """
             Description:
                 Executes the `Listener` object. If a custom `Action` is defined
@@ -65,5 +67,5 @@ class Listener():
                 - *args : `list`, optional arguments to send to custom executor
 
         """
-        if self.__action != None: print(self.__action.execute(*args))
+        if self.__action != None: print(self.__action.execute(transition=transition, **kwargs))
         else: self.__default_execution(transition)

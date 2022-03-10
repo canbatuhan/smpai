@@ -17,10 +17,13 @@ class FiniteStateMachine:
                 - config_file_path : `str`, path of the configuration file
         """
         self.__config_file_path = config_file_path
+        self.__machine_id = None
+        self.__auto_startup = None
+        self.__initial_state = None
+        self.__final_state = None
         self.__context = StateMachineContext()
         self.__states = set()
         self.__transitions = set()
-        self.__actions = set()
         self.__listener = Listener()
 
 
