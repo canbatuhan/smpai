@@ -2,19 +2,18 @@ from components import StateMachineContext, Listener
 
 class FiniteStateMachine:
     """
-        Represents the Finite State Machine structure with,
-        context, states, transitions, actions and a listener.
-        It can be built through configuration file.
+        Represents the `FiniteStateMachine` structure with, `StateMachineContext`,
+        `State`, `Transition`, `Action`, `Event` and `Listener` objects.
     """
 
-    def __init__(self, config_file_path:str) -> None:
+    def __init__(self, config_file_path:str=None) -> None:
         """
             Description:
                 Creates an unbuilt FSM. It can built through
                 an configuration file.
 
             Arguments:
-                - config_file_path : `str`, path of the configuration file
+                - config_file_path : `str` - path of the configuration file
         """
         self.__config_file_path = config_file_path
         self.__machine_id = None
@@ -34,7 +33,7 @@ class FiniteStateMachine:
                 from the configuration file
 
             Arguments:
-                - configuration : `dict`, config data of FSM
+                - configuration : `dict` - config data of `FiniteStateMachine`
         """
         pass
 
@@ -47,5 +46,5 @@ class FiniteStateMachine:
         pass
 
 
-    def send_event(self, event:object) -> bool:
+    def send_event(self) -> None:
         pass

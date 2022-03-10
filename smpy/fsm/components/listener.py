@@ -1,12 +1,11 @@
-import subprocess
 from action import Action
-from context import StateMachineContext
 from state import State
 from transition import Transition
 
+
 class Listener():
     """
-        Represents the Listener component of a finite state machine.
+        Represents the Listener component of a `FiniteStateMachine`.
         It follows what is happening in the state machine.
     """
 
@@ -16,10 +15,11 @@ class Listener():
                 Creates a Listener object that runs the given function.
 
             Arguments:
-                - package : `str`, name of the package
-                - module : `str`, name of the module
-                - function : `str`, name of the function
-                - params : `set`, set of parameters
+                - package : `str` - name of the package of the user-defined function
+                - module : `str` - name of the module of the user-defined function
+                - function : `str` - name of the user-defined function
+                - params : `set` - set of parameter names, they must be variables
+                stored in `StateMachineContext`
         """
         self.__action = None
         self.__custom_condition = package==None or module==None or function==None
@@ -40,9 +40,7 @@ class Listener():
                 what state change is happened.
 
             Arguments:
-                - from_state : `State`, state that the transition flows from
-                - to_state : `State`, state that the transition flows to
-                - event : `object`, event that triggers the transition
+                - transition : `Transition` - last transition executed 
         """
         if transition.get_source() == None: print("{}\t-- {} -->\t{}".format(
             " ", "INIT", transition.get_destination().get_id()))
@@ -63,8 +61,9 @@ class Listener():
                 will be held. 
 
             Arguments:
-                - transition : `Transition`, last transition executed
-                - *args : `list`, optional arguments to send to custom executor
+                - transition : `Transition` - last transition executed
+                - **kwargs : `dict` - specific function parameters, they must be
+                variables stored in `StateMachineContext
 
         """
         if self.__action != None: print(self.__action.execute(transition=transition, **kwargs))

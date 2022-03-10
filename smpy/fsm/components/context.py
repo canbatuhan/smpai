@@ -2,11 +2,12 @@ from state import State
 from transition import Transition
 from listener import Listener
 
+
 class StateMachineContext:
     """
-        State machine context stores information related to
-        the current situation of the state machine and stores
-        machine specific variables (defined by the programmer).
+        Represents the context of a `FiniteStateMachine`. Stores information
+        related to the current situation of the state machine and stores
+        machine-specific variables (defined by the programmer).
     """
 
     def __init__(self) -> None:
