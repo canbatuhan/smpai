@@ -1,14 +1,13 @@
-from typing import Any
 import subprocess
 
-
-def __generate_command(module:str, function:str, **kwargs) -> str:
+def __generate_command(package:str, module:str, function:str, params:list, *args) -> str:
     """
         Description:
             Generates a one-line python script to run the
             given function in the given module
         
         Arguments:
+            - package: `str`, name of the package
             - module : `str`, name of the module
             - function : `str`, name of the function
             - kwargs : `dict`, specific arguments with keywords
@@ -17,11 +16,11 @@ def __generate_command(module:str, function:str, **kwargs) -> str:
             - `str` : generated command to run the function
     """
     arguments = ""
-    for key, value in kwargs.items():
-        arguments += "{}={},".format(key, value)
+    for index, param in enumerate(params):
+        arguments += "{}={},".format(param, args[index])
 
-    return """python -c "from {} import {}; print({}({}))""".format(
-        module, function, function, kwargs)
+    return """python -c "from {}.{} import {}; print({}({}))""".format(
+        package, module, function, function, arguments)
 
 
 def __run_command(command:str) -> str:
@@ -51,17 +50,21 @@ class Action:
         In actions, user-defined functions are executed.
     """
 
-    def __init__(self, action_config:dict) -> None:
+    def __init__(self, package:str, module:str, function:str, params:list) -> None:
         """
             Description:
                 Creates an Action object that runs the given function.
 
             Arguments:
-                - action_config : `dict`, configuration for the action
+                - package : `str`, name of the package
+                - module : `str`, name of the module
+                - function : `str`, name of the function
+                - params : `list`, parameter keywords
         """
-        self.__module = action_config.get('module')
-        self.__function = action_config.get('function')
-        self.__arguments = action_config.get('arguments')
+        self.__package = package
+        self.__module = module
+        self.__function = function
+        self.__params = params
 
 
     def __str__(self) -> str:
@@ -69,23 +72,22 @@ class Action:
             Description:
                 Representation an Action object as string 
         """
-        return "[Module: {}, Function {}]".format(
-            self.__module, self.__function)
+        return "[Package: {}, Module: {}, Function {}]".format(
+            self.__package, self.__module, self.__function)
 
 
-    def execute(self) -> str:
+    def execute(self, *args) -> str:
         """
             Description:
                 Executes the function embedded in action and returns
                 the output value as STRING, for now.
-
-            Arguments:
-                - **kwargs : `dict`, specific arguments with keywords
         """
         return __run_command(
             __generate_command(
+                package=self.__package,
                 module=self.__module,
                 function=self.__function,
-                kwargs=self.__arguments
+                params=self.__params,
+                *args
             )
         )

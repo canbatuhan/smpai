@@ -8,5 +8,5 @@ class FiniteStateMachine:
     def start(self) -> None:
         pass
 
-    def send_event(self, event:str) -> bool:
+    def send_event(self, event:object) -> bool:
         pass
