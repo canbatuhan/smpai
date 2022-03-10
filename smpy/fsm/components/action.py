@@ -1,6 +1,6 @@
 import subprocess
 
-def __generate_command(package:str, module:str, function:str, params:list, *args) -> str:
+def __generate_command(package:str, module:str, function:str, *args) -> str:
     """
         Description:
             Generates a one-line python script to run the
@@ -10,17 +10,13 @@ def __generate_command(package:str, module:str, function:str, params:list, *args
             - package: `str`, name of the package
             - module : `str`, name of the module
             - function : `str`, name of the function
-            - kwargs : `dict`, specific arguments with keywords
+            - *args : `list`, optional arguments
 
         Return:
             - `str` : generated command to run the function
     """
-    arguments = ""
-    for index, param in enumerate(params):
-        arguments += "{}={},".format(param, args[index])
-
-    return """python -c "from {}.{} import {}; print({}({}))""".format(
-        package, module, function, function, arguments)
+    return """python -c "from {}.{} import {}; print({}{})""".format(
+        package, module, function, function, args)
 
 
 def __run_command(command:str) -> str:
@@ -28,7 +24,7 @@ def __run_command(command:str) -> str:
         Description:
             Runs the command previously generated and
             capture the output (via. print function used
-            in the generated command)
+            in the generated command).
 
         Arguments:
             - command : `str`, previously generated command
@@ -50,7 +46,7 @@ class Action:
         In actions, user-defined functions are executed.
     """
 
-    def __init__(self, package:str, module:str, function:str, params:list) -> None:
+    def __init__(self, package:str, module:str, function:str) -> None:
         """
             Description:
                 Creates an Action object that runs the given function.
@@ -59,12 +55,10 @@ class Action:
                 - package : `str`, name of the package
                 - module : `str`, name of the module
                 - function : `str`, name of the function
-                - params : `list`, parameter keywords
         """
         self.__package = package
         self.__module = module
         self.__function = function
-        self.__params = params
 
 
     def __str__(self) -> str:
@@ -87,7 +81,6 @@ class Action:
                 package=self.__package,
                 module=self.__module,
                 function=self.__function,
-                params=self.__params,
                 *args
             )
         )

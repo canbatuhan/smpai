@@ -7,12 +7,13 @@ function = 'sum'
 params = ["num1", "num2"]
 
 def generate_command(package, module, function, params, *args):
+    print(args)
     keyword_args = ""
     for index, param in enumerate(params):
         keyword_args += "{}={},".format(
             param, args[index])
             
-    return f"""python -c "from {package}.{module} import {function}; print({function}({keyword_args}))"""
+    return f"""python -c "from {package}.{module} import {function}; print({function}{args})"""
 
 def run_command(command):
     return subprocess.run(

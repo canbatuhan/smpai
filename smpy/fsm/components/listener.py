@@ -1,6 +1,8 @@
 import subprocess
 from action import Action
+from context import StateMachineContext
 from state import State
+from transition import Transition
 
 class Listener():
     """
@@ -8,34 +10,60 @@ class Listener():
         It follows what is happening in the state machine.
     """
 
-    def __init__(self, package:str=None, module:str=None, function:str=None, params:dict=None) -> None:
+    def __init__(self, package:str=None, module:str=None, function:str=None) -> None:
         """
             Description:
-                Creates a Listener object that runs the given function
+                Creates a Listener object that runs the given function.
 
             Arguments:
                 - package : `str`, name of the package
                 - module : `str`, name of the module
                 - function : `str`, name of the function
-                - arguments : `dict`, specific arguments with keywords
         """
         self.__action = None
-        self.__custom_condition = package==None or module==None or function==None or params==None
+        self.__custom_condition = package==None or module==None or function==None
         
         if self.__custom_condition:
             self.__action = Action(
                 package=package,
                 module=module,
                 function=function,
-                params=params
             )
 
     
-    def __default_execution(self, from_state:State, to_state:State, event:object) -> None:
-        if from_state == None: print("-- INIT -->\t{}".format("", event, to_state))
-        else: print("{}\t-- {} -->\t{}".format(from_state, event, to_state))
+    def __default_execution(self, transition:Transition) -> None:
+        """
+            Description:
+                Executes the `Listener` object as default. It basically echos
+                what state change is happened.
+
+            Arguments:
+                - from_state : `State`, state that the transition flows from
+                - to_state : `State`, state that the transition flows to
+                - event : `object`, event that triggers the transition
+        """
+        if transition.get_source() == None: print("{}\t-- {} -->\t{}".format(
+            " ", "INIT", transition.get_destination().get_id()))
+
+        else:
+            print("{}\t-- {} -->\t{}".format(
+                    transition.get_source().get_id(),
+                    transition.get_event(),
+                    transition.get_destination().get_id()))
 
 
-    def execute(self, from_state:State, to_state:State, event:object, *args) -> None:
+    def execute(self, transition:Transition, *args) -> None:
+        """
+            Description:
+                Executes the `Listener` object. If a custom `Action` is defined
+                as `Listener` executor, then this action is executed. Otherwise,
+                default execution (`__default_execution(transition:Transition)`)
+                will be held. 
+
+            Arguments:
+                - transition : `Transition`, last transition executed
+                - *args : `list`, optional arguments to send to custom executor
+
+        """
         if self.__action != None: print(self.__action.execute(*args))
-        else: self.__default_execution(from_state, to_state, event)
+        else: self.__default_execution(transition)

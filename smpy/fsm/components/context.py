@@ -6,24 +6,22 @@ class StateMachineContext:
     """
         State machine context stores information related to
         the current situation of the state machine and stores
-        machine specific variables (defined by the programmer)
+        machine specific variables (defined by the programmer).
     """
 
     def __init__(self) -> None:
         """
             Description:
-                Creates a StateMachineContext object
+                Creates a StateMachineContext object.
         """
         self.__machine_id = None
         self.__auto_start = None
+        self.__initial_state = None
         self.__current_state = None
         self.__last_event = None
         self.__last_transition = None
         self.__variables = dict()
-        self.__states = set()
-        self.__transitions = set()
-        self.__actions = set()
-        self.__listener = Listener()
+
 
     """
         Getters
@@ -33,6 +31,9 @@ class StateMachineContext:
 
     def get_auto_start(self) -> bool:
         return self.__auto_start
+
+    def get_initial_state(self) -> State:
+        return self.__initial_state
 
     def get_current_state(self) -> State:
         return self.__current_state
@@ -46,18 +47,6 @@ class StateMachineContext:
     def get_variables(self) -> dict: 
         return self.__variables
 
-    def get_states(self) -> set:
-        return self.__states
-
-    def get_transitions(self) -> set:
-        return self.__transitions
-
-    def get_actions(self) -> set:
-        return self.__actions
-
-    def get_listener(self) -> Listener:
-        return self.__listener
-
 
     """
         Setters
@@ -67,6 +56,9 @@ class StateMachineContext:
 
     def set_auto_start(self, auto_start:bool) -> None:
         self.__auto_start = auto_start
+
+    def set_initial_state(self, initial_state:State) -> None:
+        self.__initial_state = initial_state
 
     def set_current_state(self, state:State) -> None:
         self.__current_state = state
@@ -79,15 +71,3 @@ class StateMachineContext:
 
     def set_variables(self, variables:dict) -> None:
         self.__variables = variables
-
-    def set_states(self, states:set) -> None:
-        self.__states = states
-
-    def set_transitions(self, transitions:set) -> None:
-        self.__transitions = transitions
-
-    def set_actions(self, actions:set) -> None:
-        self.__actions = actions
-
-    def set_listener(self, listener:Listener) -> None:
-        self.__listener = listener

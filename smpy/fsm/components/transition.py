@@ -7,7 +7,7 @@ class Transition:
         In transitions actions can be executed.
     """
 
-    def __init__(self, source:State, destination:State, action:Action=None) -> None:
+    def __init__(self, source:State, destination:State, event:object, action:Action=None) -> None:
         """
             Description:
                 Creates a Transition object that changes the current state,
@@ -21,16 +21,33 @@ class Transition:
         """
         self.__source = source
         self.__destination = destination
+        self.__event = event
         self.__action = action
 
     
     def __str__(self) -> str:
         """
             Description:
-                Representation of a Transation object as string
+                Representation of a Transation object as string.
         """
-        return "[Source: {}, Destination: {}, Action: {}]".format(
-            self.__source, self.__destination, self.__action)
+        return "[Source: {}, Destination: {}, Event: {}, Action: {}]".format(
+            self.__source, self.__destination, self.__event, self.__action)
+
+
+    """
+        Getters
+    """
+    def get_source(self) -> State:
+        return self.__source
+
+    def get_destination(self) -> State:
+        return self.__destination
+
+    def get_event(self) -> object:
+        return self.__event
+
+    def get_action(self) -> Action:
+        return self.__action
 
 
     def execute(self) -> bool:
