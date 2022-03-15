@@ -42,14 +42,15 @@ class Listener():
             Arguments:
                 - transition : `Transition` - last transition executed 
         """
-        if transition.get_source() == None: print("{}\t-- {} -->\t{}".format(
-            " ", "INIT", transition.get_destination().get_id()))
+        if transition.get_source() == None:
+            print("{}\t-- {} -->\t{}".format(
+                " ", "INIT", transition.get_destination().get_id()))
 
         else:
             print("{}\t-- {} -->\t{}".format(
-                    transition.get_source().get_id(),
-                    transition.get_event(),
-                    transition.get_destination().get_id()))
+                transition.get_source().get_id(),
+                transition.get_event(),
+                transition.get_destination().get_id()))
 
 
     def execute(self, transition:Transition, **kwargs) -> None:

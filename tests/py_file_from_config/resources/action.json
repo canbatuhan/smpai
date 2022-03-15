@@ -1,0 +1,6 @@
+{
+    "package": "src",
+    "module": "secret",
+    "function": "santa",
+    "params": ["age", "gender"]
+}

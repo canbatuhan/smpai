@@ -49,8 +49,12 @@ class Action:
         """
         arguments = ""
         for key, value in kwargs.items():
-            arguments += "{}={},".format(
-                key, value)
+            if isinstance(value, str):
+                arguments += "{}='{}',".format(
+                    key, value)
+            else:
+                arguments += "{}={},".format(
+                    key, value)
 
         return """python -c "from {}.{} import {}; print({}({}))""".format(
             self.__package, self.__module, self.__function, self.__function, arguments)
