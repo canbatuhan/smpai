@@ -25,15 +25,6 @@ class Transition:
         self.__event = event
         self.__action = action
 
-    
-    def __str__(self) -> str:
-        """
-            Description:
-                Representation of a Transation object as string.
-        """
-        return "[Source: {}, Destination: {}, Event: {}, Action: {}]".format(
-            self.__source, self.__destination, self.__event, self.__action)
-
 
     """
         Getters

@@ -24,15 +24,6 @@ class State:
         self.__exit_action = exit_action
 
 
-    def __str__(self) -> str:
-        """
-            Description:
-                Representation of a State object as string.
-        """
-        return "[StateID: {}, EntryAction: {}, InnerAction: {}, ExitAction: {}]".format(
-            self.__state_id, self.__entry_action, self.__inner_action, self.__exit_action)
-
-
     """
         Getters
     """

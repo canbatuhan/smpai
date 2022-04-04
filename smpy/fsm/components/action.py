@@ -25,15 +25,6 @@ class Action:
         self.__params = params
 
 
-    def __str__(self) -> str:
-        """
-            Description:
-                Representation an Action object as string 
-        """
-        return "[Package: {}, Module: {}, Function: {}, Params: {}]".format(
-            self.__package, self.__module, self.__function, self.__params)
-
-
     def __generate_command(self, **kwargs) -> str:
         """
             Description:

@@ -1,4 +1,4 @@
-from .components import StateMachineContext
+from .components import StateMachineContext, State, Listener
 from .builder import StateMachineBuilder
 
 class FiniteStateMachine:
@@ -17,20 +17,29 @@ class FiniteStateMachine:
                 - config_file_path : `str` path of the configration
                 file with extension .json
         """
+        self.__machine_id = str()
+        self.__auto_startup = bool()
+        self.__context = StateMachineContext()
+        self.__states = set()
+        self.__transitions = set()
+        self.__listener = None
+        self.__initial_state = None
+        self.__final_state = None
+
         if config_file_path is not None:
             components = self.__build_with_config(config_file_path)
             self.__machine_id = components['machine_id']
             self.__auto_startup = components['auto_startup']
-
-            self.__context = StateMachineContext()
             self.__context.set_variables(components['variables'])
-
             self.__states = components['states']
-            self.__initial_state = "S_INIT"
-            self.__final_state = "S_FINAL"
-            
             self.__transitions = components['transitions']
             self.__listener = components['listener']
+
+        for state in self.__states:
+            if state.get_id() == 'S_INIT':
+                self.__initial_state = state
+            elif state.get_id() == 'S_FINAL':
+                self.__final_state = state
 
 
     def __build_with_config(self, config_file_path:str) -> dict:
@@ -57,7 +66,3 @@ class FiniteStateMachine:
 
     def send_event(self) -> None:
         pass
-
-
-    def get_context(self) -> StateMachineContext:
-        return self.__context
