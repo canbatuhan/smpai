@@ -1,5 +1,5 @@
-from components import StateMachineContext, State, Action, Listener
-from smpy.fsm.builder import StateMachineBuilder
+from .components import StateMachineContext
+from .builder import StateMachineBuilder
 
 class FiniteStateMachine:
     """
@@ -19,8 +19,8 @@ class FiniteStateMachine:
         """
         if config_file_path is not None:
             components = self.__build_with_config(config_file_path)
-            self.__machine_id = components['id']
-            self.__auto_startup = components['autostartup']
+            self.__machine_id = components['machine_id']
+            self.__auto_startup = components['auto_startup']
 
             self.__context = StateMachineContext()
             self.__context.set_variables(components['variables'])
@@ -57,3 +57,7 @@ class FiniteStateMachine:
 
     def send_event(self) -> None:
         pass
+
+
+    def get_context(self) -> StateMachineContext:
+        return self.__context

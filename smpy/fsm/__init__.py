@@ -1,3 +1,3 @@
 from .fsm import FiniteStateMachine
-import components
-import builder
+from . import components
+from . import builder

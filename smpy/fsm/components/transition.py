@@ -1,5 +1,5 @@
-from action import Action
-from state import State
+from .action import Action
+from .state import State
 
 class Transition:
     """

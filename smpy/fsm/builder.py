@@ -33,8 +33,8 @@ class StateMachineBuilder:
         config = json.load(open(self.__config_file_path, 'r'))
 
         return {
-            'id': config['id'],
-            'autostartup': config['autostartup'],
+            'machine_id': config['machine_id'],
+            'auto_startup': config['auto_startup'],
             'variables': self.__parser.parse_variables(config['variables']),
             'states': self.__parser.parse_states(config['states']),
             'transitions': self.__parser.parse_transitions(config['transitions']),

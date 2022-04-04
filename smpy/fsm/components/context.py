@@ -1,5 +1,5 @@
-from state import State
-from transition import Transition
+from .state import State
+from .transition import Transition
 
 
 class StateMachineContext:

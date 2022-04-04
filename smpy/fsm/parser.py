@@ -1,4 +1,4 @@
-from components import Action, Listener, State, Transition
+from .components import Action, Listener, State, Transition
 
 
 class JSONParser:
@@ -28,7 +28,7 @@ class JSONParser:
 
         for variable in variables_config:
             key = variable['key']
-            initial_value = variable['initial_value']
+            initial_value = variable['value']
             data_type = variable['type']
 
             if data_type == 'str':
