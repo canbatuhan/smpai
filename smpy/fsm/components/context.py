@@ -1,6 +1,5 @@
 from state import State
 from transition import Transition
-from listener import Listener
 
 
 class StateMachineContext:

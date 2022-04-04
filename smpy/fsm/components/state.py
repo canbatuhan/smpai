@@ -7,7 +7,7 @@ class State:
         `entry_action` and `exit_action`.
     """
 
-    def __init__(self, state_id:str, entry_action:Action=None, inner_action:Action=None, exit_action:Action=None) -> None:
+    def __init__(self, state_id:str=None, entry_action:Action=None, inner_action:Action=None, exit_action:Action=None) -> None:
         """
             Description:
                 Creates a State object with given parameters.
@@ -40,8 +40,6 @@ class State:
         return self.__state_id
 
     def get_actions(self) -> dict:
-        return {
-            'entry_action': self.__entry_action,
-            'inner_action': self.__inner_action,
-            'exit_action': self.__exit_action
-        }
+        return {'entry_action': self.__entry_action,
+                'inner_action': self.__inner_action,
+                'exit_action': self.__exit_action}

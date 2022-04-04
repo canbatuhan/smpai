@@ -33,7 +33,8 @@ class FiniteStateMachine:
                 from the configuration file
 
             Arguments:
-                - configuration : `dict` - config data of `FiniteStateMachine`
+                - configuration : `dict` - configuration data for
+                the `FiniteStateMachine`
         """
         pass
 
