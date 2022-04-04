@@ -1,5 +1,5 @@
-from .components import StateMachineContext, State, Listener
-from .builder import StateMachineBuilder
+from .statemachine.components import StateMachineContext, State, Listener
+from .statemachine.builder import StateMachineBuilder
 
 class FiniteStateMachine:
     """
