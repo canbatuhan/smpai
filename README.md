@@ -2,13 +2,11 @@
 
 <div>
     <p>smpy is a framework to configure, build and run different types of state machines with custom states and custom actions. In smpy, aim is to provide an environment, in where the programmer is able to;</p>
-    
     <ul>
       <li>Configure state machines easily, through configuration files such as JSON, YAML, etc.</li>
       <li>Build state machines in the background, so the programmer will not be dealing with any unnecessary coding.</li
       <li>Run state machines by sending events (can be custom objects, or just strings) and execute custom actions (pre-written packages, modules and functions) while running.</li>
     </ul>
-    
     <div>
         <h2>Different Types Of State Machines</h2>
         <p>For now, there is only one type of state machine defined in smpy.</p>
@@ -19,7 +17,6 @@
             </li>
         </ul>
     </div>
-  
     <div>
         <h2>Configuring A State Machine</h2>
         <p>For now, there is only one way to build a state machine in smpy.</p>
