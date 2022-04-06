@@ -5,6 +5,12 @@ smpy is a framework to configure, build and run different types of state machine
 - Build state machines in the background, so the programmer will not be dealing with any unnecessary coding.
 - Run state machines by sending events (can be custom objects, or just strings) and execute custom actions (pre-written packages, modules and functions) while running.
 
+## Context
+- ### Different Types Of State Machines
+- ### Configuring A State Machine
+- ### Building In The Background
+- ### Using Custom Actions
+- ### Running A State Machine 
 
 ## Different Types Of State Machines
 For now, there is only one type of state machine defined in smpy.
