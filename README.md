@@ -20,7 +20,7 @@ It is a type of state machine which has a finite number of states. In Finite-Sta
 
 
 ## Configuring A State Machine
-For now, there is only one way to build a state machine in smpy.
+For now, there is only one way to configure a state machine in smpy.
 
 ### Configuring A State Machine Through JSON File
 Using JSON configuration files is bit of uncomfortable for the programmer, however it is still easy to configure and parse in the background.
