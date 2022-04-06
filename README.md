@@ -1,4 +1,4 @@
-smpy - State Machine Framework
+#smpy - State Machine Framework
 smpy is a framework to configure, build and run different types of state machines with custom states and custom actions. In smpy, aim is to provide an environment, in where the programmer is able to;
 
 - Configure state machines easily, through configuration files such as JSON, YAML, etc.
