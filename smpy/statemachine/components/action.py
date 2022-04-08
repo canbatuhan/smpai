@@ -13,11 +13,11 @@ class Action:
                 Creates an Action object that runs the given function.
 
             Arguments:
-                - package : `str` - name of the package of the user-defined function
-                - module : `str` - name of the module of the user-defined function
-                - function : `str` - name of the user-defined function
+                - package : `str` - name of the package of the user-defined function.
+                - module : `str` - name of the module of the user-defined function.
+                - function : `str` - name of the user-defined function.
                 - params : `set` - set of parameter names, they must be variables
-                stored in `StateMachineContext`
+                stored in `StateMachineContext`.
         """
         self.__package = package
         self.__module = module
@@ -29,14 +29,14 @@ class Action:
         """
             Description:
                 Generates a one-line python script to run the given function
-                implemented in the given module of the given package
+                implemented in the given module of the given package.
             
             Arguments:
                 - **kwargs : `dict` - specific function parameters, they must be
-                variables stored in `StateMachineContext`
+                variables stored in `StateMachineContext`.
 
             Return:
-                - `str` : generated command to run the user-defined function
+                - `str` : generated command to run the user-defined function.
         """
         arguments = ""
         for key, value in kwargs.items():
@@ -58,10 +58,10 @@ class Action:
                 (via. print function used in the generated command).
 
             Arguments:
-                - runner_cmd : `str` - commands generated with the given parameters
+                - runner_cmd : `str` - commands generated with the given parameters.
 
             Return:
-                - `str` : captured output from command line (can be casted)
+                - `str` : captured output from command line (can be casted).
         """
         return subprocess.run(
             args=runner_cmd,
@@ -79,9 +79,9 @@ class Action:
 
             Arguments:
                 - **kwargs : `dict` - specific function parameters, they must be
-                variables stored in `StateMachineContext
+                variables stored in `StateMachineContext.
 
             Return:
-                - `str` : captured output from the execution of the function
+                - `str` : captured output from the execution of the function.
         """
         return self.__run_command(self.__generate_command(**kwargs))

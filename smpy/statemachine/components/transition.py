@@ -14,10 +14,10 @@ class Transition:
                 from `source` to `destination`.
 
             Arguments:
-                - source : `State` - state that the transition starts
-                - destination : `State` - state that the transition ends
-                - event : `object` - event triggering the transition
-                - action : `Action` - action that will be executing during transition
+                - source : `State` - state that the transition starts.
+                - destination : `State` - state that the transition ends.
+                - event : `object` - event triggering the transition.
+                - action : `Action` - action that will be executing during transition.
 
         """
         self.__source = source

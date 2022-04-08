@@ -13,10 +13,10 @@ class State:
                 Creates a State object with given parameters.
 
             Arguments:
-                - state_id : `str` - unique ID of the state
-                - entry_action : `Action` - entry action of the state
-                - inner_action : `Action` - inner action of the state
-                - exit_action : `Action` - exit action of the state
+                - state_id : `str` - unique ID of the state.
+                - entry_action : `Action` - entry action of the state.
+                - inner_action : `Action` - inner action of the state.
+                - exit_action : `Action` - exit action of the state.
         """
         self.__state_id = state_id
         self.__entry_action = entry_action

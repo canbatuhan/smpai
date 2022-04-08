@@ -40,7 +40,7 @@ class Listener():
                 what state change is happened.
 
             Arguments:
-                - transition : `Transition` - last transition executed 
+                - transition : `Transition` - last transition executed.
         """
         if transition.get_source() == None:
             print("{}\t-- {} -->\t{}".format(
@@ -64,7 +64,7 @@ class Listener():
             Arguments:
                 - transition : `Transition` - last transition executed
                 - **kwargs : `dict` - specific function parameters, they must be
-                variables stored in `StateMachineContext
+                variables stored in `StateMachineContext.
 
         """
         if self.__action != None: print(self.__action.execute(transition=transition, **kwargs))

@@ -1,4 +1,3 @@
-import json
 from .parser import JSONParser
 
 
@@ -12,13 +11,12 @@ class StateMachineBuilder:
         """
             Description:
                 Creates a builder object, which uses parsers
-                to build a `FiniteStateMachine`
+                to build a `FiniteStateMachine`.
         """
-        self.__config_file_path = config_file_path
         self.__parser = None
         extension = config_file_path.split('.')[-1]
         if extension == 'json':
-            self.__parser = JSONParser()
+            self.__parser = JSONParser(config_file_path)
 
 
     def build(self) -> dict:
@@ -30,13 +28,11 @@ class StateMachineBuilder:
             Return:
                 - `dict` : components of the `FiniteStateMachine`.
         """
-        config = json.load(open(self.__config_file_path, 'r'))
-
         return {
-            'machine_id': config['machine_id'],
-            'auto_startup': config['auto_startup'],
-            'variables': self.__parser.parse_variables(config['variables']),
-            'states': self.__parser.parse_states(config['states']),
-            'transitions': self.__parser.parse_transitions(config['transitions']),
-            'listener': self.__parser.parse_listener(config['listener'])
+            'machine_id': self.__parser.parse_machine_id(),
+            'auto_startup': self.__parser.parse_auto_startup(),
+            'variables': self.__parser.parse_variables(),
+            'states': self.__parser.parse_states(),
+            'transitions': self.__parser.parse_transitions(),
+            'listener': self.__parser.parse_listener()
         }

@@ -68,7 +68,7 @@ class FiniteStateMachine:
         """
             Description:
                 Initialize the state machine by setting the current
-                state as initial state S_INIT
+                state as initial state S_INIT.
         """
 
 
@@ -79,10 +79,10 @@ class FiniteStateMachine:
                 transition if valid.
 
             Arguments:
-                - event : `str` - event object (str for now)
+                - event : `str` - event object (str for now).
 
             Return:
                 - `bool` : True if transition is triggered, otherwise
-                returns False
+                returns False.
         """
         pass

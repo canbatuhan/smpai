@@ -1,3 +1,4 @@
+import json
 from .components import Action, Listener, State, Transition
 
 
@@ -7,26 +8,55 @@ class JSONParser:
         from a .json file.
     """
 
-    def __init__(self) -> None:
-        pass
+    def __init__(self, file_path:str) -> None:
+        """
+            Description:
+                Creates a JSONParser object in order to parse
+                .json file storing configuration data of a state
+                machine.
+
+            Arguments:
+                - file_path : `str` - path of the configuration file.
+        """
+        self.__config = json.load(open(file_path, 'r'))
 
 
-    def parse_variables(self, variables_config:list) -> dict:
+    def parse_machine_id(self) -> str:
+        """
+            Description:
+                Parse the unique ID of the state machine.
+
+            Return: 
+                - `str` : unique ID of the state machine.
+        """
+        return self.__config['machine_id']
+
+    
+    def parse_auto_startup(self) -> bool:
+        """
+            Description:
+                Parse the auto startup information of the
+                state machine.
+
+            Return:
+                - `bool` : True, if the state machine will start
+                as it created, false otherwise.
+        """
+        return self.__config['auto_startup']
+
+
+    def parse_variables(self) -> dict:
         """
             Description:
                 Parse the variables given in the .json
                 configuration file.
-
-            Arguments:
-                - variables_config : `dict` - configraution data
-                for the variables of the state machine.
 
             Return:
                 - `dict` : dictionary storing variables with keys.
         """
         variables = dict()
 
-        for variable in variables_config:
+        for variable in self.__config['variables']:
             key = variable['key']
             initial_value = variable['value']
             data_type = variable['type']
@@ -45,22 +75,18 @@ class JSONParser:
         return variables
 
 
-    def parse_states(self, states_config:list) -> set:
+    def parse_states(self) -> set:
         """
             Description:
                 Parse the states given in the .json
-                configuration file
-
-            Arguments:
-                - states_config : `list` - configraution data
-                for the states of the state machine
+                configuration file.
 
             Return:
-                - `dict` : set storing `State` objects
+                - `dict` : set storing `State` objects.
         """
         states = set()
 
-        for state in states_config:
+        for state in self.__config['states']:
             state_id = state['id']
             entry_action = state['entry_action']
             inner_action = state['inner_action']
@@ -92,22 +118,18 @@ class JSONParser:
         return states
 
 
-    def parse_transitions(self, transitions_config:list) -> set:
+    def parse_transitions(self) -> set:
         """
             Description:
                 Parse the transitions given in the .json
-                configuration file
-
-            Arguments:
-                - transitions_config : `list` - configraution data
-                for the states of the state machine
+                configuration file.
 
             Return:
-                - `dict` : set storing `Transition` objects
+                - `dict` : set storing `Transition` objects.
         """
         transitions = set()
 
-        for transition in transitions_config:
+        for transition in self.__config['transitions']:
             source = transition['source']
             destination = transition['source']
             event = transition['event']
@@ -125,26 +147,22 @@ class JSONParser:
         return transitions
 
 
-    def parse_listener(self, listener_config:dict) -> Listener:
+    def parse_listener(self) -> Listener:
         """
             Description:
                 Parse the listener given in the .json
-                configuration file
-
-            Arguments:
-                - listener_config : `dict` - configraution data
-                for the listener of the state machine
+                configuration file.
 
             Return:
-                - `dict` : state machine's `Listener` object
+                - `dict` : state machine's `Listener` object.
         """
         listener = Listener()
 
-        if listener_config is not None:
+        if self.__config['listener'] is not None:
             listener = Listener(
-                    package = listener_config['package'],
-                    module = listener_config['module'],
-                    function = listener_config['function'],
-                    params = listener_config['params'])
+                    package = self.__config['listener']['package'],
+                    module = self.__config['listener']['module'],
+                    function = self.__config['listener']['function'],
+                    params = self.__config['listener']['params'])
 
         return listener
