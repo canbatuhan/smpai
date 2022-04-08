@@ -34,5 +34,5 @@ Using configuration files is a bit uncomfortable for the programmer, however it 
 
 ### Configuring State Machines Through Multiple Files
 
-For more complex state machines, using multiple configuration files would be more easy for the programmer to configure a state machine. Single configuration files for each section such as `states.yaml`, `transitions.yaml`, etc can be configured, later these configuration files can be imported in a main configuration file.
+For more complex state machines, using multiple configuration files would be more easy for the programmer to configure a state machine. Single configuration files for each section such as _states.yaml_, _transitions.yaml_, etc can be configured, later these configuration files can be imported in a main configuration file.
 
