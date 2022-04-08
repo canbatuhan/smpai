@@ -1,1 +1,0 @@
-print("GO SMPY GO!")

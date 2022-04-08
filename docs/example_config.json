@@ -4,8 +4,8 @@
     "auto_startup": true,
 
     "variables": [
-        {"key": "admin", "value": "Racoon"},
-        {"key": "lucky_number", "value": 42}
+        {"key": "admin", "value": "Racoon", "type": "str"},
+        {"key": "lucky_number", "value": 42, "type": "int"}
     ],
 
     "states": [

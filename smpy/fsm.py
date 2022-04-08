@@ -8,7 +8,7 @@ class FiniteStateMachine:
         `State`, `Transition`, `Action`, `Event` and `Listener` objects.
     """
 
-    def __build_with_config(config_file_path:str) -> dict:
+    def __build_with_config(self, config_file_path:str) -> dict:
         """
             Description:
                 Builds the FSM with the given configuration, read
@@ -86,3 +86,25 @@ class FiniteStateMachine:
                 returns False.
         """
         pass
+
+
+    """
+        Getters
+    """
+    def get_machine_id(self) -> str:
+        return self.__machine_id
+
+    def get_auto_startup(self) -> bool:
+        return self.__auto_startup
+
+    def get_context(self) -> StateMachineContext:
+        return self.__context
+
+    def get_states(self) -> set:
+        return self.__states
+
+    def get_transitions(self) -> set:
+        return self.__transitions
+
+    def get_listener(self) -> Listener:
+        return self.__listener

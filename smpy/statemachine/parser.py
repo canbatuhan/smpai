@@ -10,16 +10,7 @@ class Parser:
     """
 
     def __init__(self) -> None:
-        """
-            Description:
-                Creates a `Parser` object in order to parse
-                config file storing configuration data of a state
-                machine.
-
-            Arguments:
-                - file_path : `str` - path of the configuration file.
-        """
-        self.__config = dict()
+        self.config = dict()
 
 
     def parse_machine_id(self) -> str:
@@ -30,7 +21,7 @@ class Parser:
             Return: 
                 - `str` : unique ID of the state machine.
         """
-        return self.__config['machine_id']
+        return self.config['machine_id']
 
     
     def parse_auto_startup(self) -> bool:
@@ -43,7 +34,7 @@ class Parser:
                 - `bool` : True, if the state machine will start
                 as it created, false otherwise.
         """
-        return self.__config['auto_startup']
+        return self.config['auto_startup']
 
 
     def parse_variables(self) -> dict:
@@ -57,7 +48,7 @@ class Parser:
         """
         variables = dict()
 
-        for variable in self.__config['variables']:
+        for variable in self.config['variables']:
             key = variable['key']
             initial_value = variable['value']
             data_type = variable['type']
@@ -87,7 +78,7 @@ class Parser:
         """
         states = set()
 
-        for state in self.__config['states']:
+        for state in self.config['states']:
             state_id = state['id']
             entry_action = state['entry_action']
             inner_action = state['inner_action']
@@ -130,7 +121,7 @@ class Parser:
         """
         transitions = set()
 
-        for transition in self.__config['transitions']:
+        for transition in self.config['transitions']:
             source = transition['source']
             destination = transition['source']
             event = transition['event']
@@ -159,21 +150,39 @@ class Parser:
         """
         listener = Listener()
 
-        if self.__config['listener'] is not None:
+        if self.config['listener'] is not None:
             listener = Listener(
-                    package = self.__config['listener']['package'],
-                    module = self.__config['listener']['module'],
-                    function = self.__config['listener']['function'],
-                    params = self.__config['listener']['params'])
+                    package = self.config['listener']['package'],
+                    module = self.config['listener']['module'],
+                    function = self.config['listener']['function'],
+                    params = self.config['listener']['params'])
 
         return listener
 
 
 class JSONParser(Parser):
     def __init__(self, file_path:str) -> None:
-        self.__config = json.load(open(file_path, 'r'))
+        """
+            Description:
+                Creates a `Parser` object in order to parse
+                config file storing configuration data of a state
+                machine.
+
+            Arguments:
+                - file_path : `str` - path of the configuration file.
+        """
+        self.config = json.load(open(file_path, 'r'))
 
 
 class YAMLParser(Parser):
     def __init__(self, file_path:str) -> None:
-        self.__config = yaml.safe_load(open(file_path, 'r'))
+        """
+            Description:
+                Creates a `Parser` object in order to parse
+                config file storing configuration data of a state
+                machine.
+
+            Arguments:
+                - file_path : `str` - path of the configuration file.
+        """
+        self.config = yaml.safe_load(open(file_path, 'r'))
