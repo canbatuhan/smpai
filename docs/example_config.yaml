@@ -1,0 +1,66 @@
+# Profile
+machine_id: An Example Machine
+auto_startup: true
+
+# Variables
+variables:
+  - key: admin
+    value: Racoon
+
+  - key: lucky_number
+    value: 42
+
+# States
+states:
+  - id: S_INIT
+    entry_action: null
+    inner_action: null
+    exit_action: null
+
+  - id: S1
+    entry_action: null
+    inner_action:
+      package: image_proc
+      module: object_detection
+      function: detect_awsome_racoons
+      params: [admin]
+    exit_action: null
+
+  - id: S2
+    entry_action: 
+      package: random
+      module: number_generator
+      function: generate
+      params: [lucky_number]
+    inner_action: null
+    exit_action: null
+
+  - id: S_FINAL
+    entry_action: null
+    inner_action: null
+    exit_action: null
+
+# Transitions
+transitions:
+  - source: S_INIT
+    destination: S1
+    event: EI1
+    action: null
+
+  - source: S1
+    destination: S2
+    event: E12
+    action: null
+
+  - source: S2
+    destination: S1
+    event: E21
+    action: null   
+
+  - source: S2
+    destination: SF
+    event: E2F
+    action: null
+  
+# Listener
+listener: null

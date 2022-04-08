@@ -1,24 +1,25 @@
 import json
+import yaml
 from .components import Action, Listener, State, Transition
 
 
-class JSONParser:
+class Parser:
     """
         Parser to build a state machine by reading inputs
-        from a .json file.
+        from a configuration file.
     """
 
-    def __init__(self, file_path:str) -> None:
+    def __init__(self) -> None:
         """
             Description:
-                Creates a JSONParser object in order to parse
-                .json file storing configuration data of a state
+                Creates a `Parser` object in order to parse
+                config file storing configuration data of a state
                 machine.
 
             Arguments:
                 - file_path : `str` - path of the configuration file.
         """
-        self.__config = json.load(open(file_path, 'r'))
+        self.__config = dict()
 
 
     def parse_machine_id(self) -> str:
@@ -48,7 +49,7 @@ class JSONParser:
     def parse_variables(self) -> dict:
         """
             Description:
-                Parse the variables given in the .json
+                Parse the variables given in the configuration
                 configuration file.
 
             Return:
@@ -78,7 +79,7 @@ class JSONParser:
     def parse_states(self) -> set:
         """
             Description:
-                Parse the states given in the .json
+                Parse the states given in the configuration
                 configuration file.
 
             Return:
@@ -121,7 +122,7 @@ class JSONParser:
     def parse_transitions(self) -> set:
         """
             Description:
-                Parse the transitions given in the .json
+                Parse the transitions given in the configuration
                 configuration file.
 
             Return:
@@ -150,7 +151,7 @@ class JSONParser:
     def parse_listener(self) -> Listener:
         """
             Description:
-                Parse the listener given in the .json
+                Parse the listener given in the configuration
                 configuration file.
 
             Return:
@@ -166,3 +167,13 @@ class JSONParser:
                     params = self.__config['listener']['params'])
 
         return listener
+
+
+class JSONParser(Parser):
+    def __init__(self, file_path:str) -> None:
+        self.__config = json.load(open(file_path, 'r'))
+
+
+class YAMLParser(Parser):
+    def __init__(self, file_path:str) -> None:
+        self.__config = yaml.safe_load(open(file_path, 'r'))
