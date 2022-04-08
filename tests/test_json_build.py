@@ -1,7 +1,10 @@
 import sys
 sys.path.append('..')
 
-from smpy.fsm import FiniteStateMachine
-sm = FiniteStateMachine('../docs/example_config.json')
+from smpy import FiniteStateMachine
 
-print(sm.get_machine_id())
+sm_single = FiniteStateMachine('../docs/single_file/sm_config.json')
+print(sm_single.get_machine_id())
+
+sm_multiple = FiniteStateMachine('../docs/multiple_files/sm_config.json')
+print(sm_multiple.get_machine_id())

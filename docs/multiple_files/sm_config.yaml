@@ -1,0 +1,5 @@
+profile_config: ../docs/multiple_files/yaml/profile.yaml
+variables_config: ../docs/multiple_files/yaml/variables.yaml
+states_config: ../docs/multiple_files/yaml/states.yaml
+transitions_config: ../docs/multiple_files/yaml/transitions.yaml
+listener_config: ../docs/multiple_files/yaml/listener.yaml

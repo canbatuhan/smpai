@@ -1,0 +1,29 @@
+[
+    {
+        "source": "S_Init",
+        "destination": "S1",
+        "event": "EI1",
+        "action": null
+    },
+
+    {
+        "source": "S1",
+        "destination": "S2",
+        "event": "E12",
+        "action": null
+    },
+
+    {
+        "source": "S2",
+        "destination": "S1",
+        "event": "E21",
+        "action": null
+    },
+
+    {
+        "source": "S2",
+        "destination": "SF",
+        "event": "E2F",
+        "action": null
+    }
+]

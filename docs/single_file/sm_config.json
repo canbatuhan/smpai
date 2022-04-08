@@ -1,7 +1,8 @@
 {
-    "machine_id": "An Example Machine",
-
-    "auto_startup": true,
+    "profile": {
+        "machine_id": "An Example Machine",
+        "auto_startup": true
+    },
 
     "variables": [
         {"key": "admin", "value": "Racoon", "type": "str"},

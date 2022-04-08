@@ -21,7 +21,7 @@ class Parser:
             Return: 
                 - `str` : unique ID of the state machine.
         """
-        return self.config['machine_id']
+        return self.config['profile']['machine_id']
 
     
     def parse_auto_startup(self) -> bool:
@@ -34,7 +34,7 @@ class Parser:
                 - `bool` : True, if the state machine will start
                 as it created, false otherwise.
         """
-        return self.config['auto_startup']
+        return self.config['profile']['auto_startup']
 
 
     def parse_variables(self) -> dict:
@@ -164,25 +164,37 @@ class JSONParser(Parser):
     def __init__(self, file_path:str) -> None:
         """
             Description:
-                Creates a `Parser` object in order to parse
-                config file storing configuration data of a state
+                Creates a `JSONParser` object in order to parse
+                JSON file storing configuration data of a state
                 machine.
 
             Arguments:
                 - file_path : `str` - path of the configuration file.
         """
         self.config = json.load(open(file_path, 'r'))
+        if 'profile' not in self.config.keys():
+            self.config['profile'] = json.load(open(self.config['profile_config'], 'r'))
+            self.config['variables'] = json.load(open(self.config['variables_config'], 'r'))
+            self.config['states'] = json.load(open(self.config['states_config'], 'r'))
+            self.config['transitions'] = json.load(open(self.config['transitions_config'], 'r'))
+            self.config['listener'] = json.load(open(self.config['listener_config'], 'r'))
 
 
 class YAMLParser(Parser):
     def __init__(self, file_path:str) -> None:
         """
             Description:
-                Creates a `Parser` object in order to parse
-                config file storing configuration data of a state
+                Creates a `YAMLParser` object in order to parse
+                YAML file storing configuration data of a state
                 machine.
 
             Arguments:
                 - file_path : `str` - path of the configuration file.
         """
         self.config = yaml.safe_load(open(file_path, 'r'))
+        if 'profile' not in self.config.keys():
+            self.config['profile'] = yaml.safe_load(open(self.config['profile_config'], 'r'))
+            self.config['variables'] = yaml.safe_load(open(self.config['variables_config'], 'r'))
+            self.config['states'] = yaml.safe_load(open(self.config['states_config'], 'r'))
+            self.config['transitions'] = yaml.safe_load(open(self.config['transitions_config'], 'r'))
+            self.config['listener'] = yaml.safe_load(open(self.config['listener_config'], 'r'))

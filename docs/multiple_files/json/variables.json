@@ -1,0 +1,4 @@
+[
+    {"key": "admin", "value": "Racoon", "type": "str"},
+    {"key": "lucky_number", "value": 42, "type": "int"}
+]
