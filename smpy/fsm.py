@@ -70,7 +70,7 @@ class FiniteStateMachine:
                 Initialize the state machine by setting the current
                 state as initial state S_INIT.
         """
-
+        pass
 
     def send_event(self, event:str) -> None:
         """
