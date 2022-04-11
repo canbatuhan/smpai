@@ -21,7 +21,7 @@ For now, there is only one type of state machine defined in `smpy`, named `Finit
 
 ### Finite-State Machine
 
-It is a type of state machine which has a finite number of states. In `Finite-State Machine`, transitions are triggered by events. Therefore, it is better to use a this type of a state machine in the programs that are event-driven.
+It is a type of state machine which has a finite number of states. In `Finite-State Machine`, transitions are triggered by events. Therefore, it is better to use this type of a state machine in the programs that are event-driven.
 
 
 ## Configuring A State Machine
