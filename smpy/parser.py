@@ -1,6 +1,6 @@
 import json
 import yaml
-from .components import Action, Listener, State, Transition
+from .statemachine import Action, Listener, State, Transition
 
 
 class Parser:

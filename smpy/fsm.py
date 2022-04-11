@@ -1,6 +1,6 @@
-from smpy.statemachine.components.transition import Transition
-from .statemachine.components import StateMachineContext, State, Listener
-from .statemachine.builder import StateMachineBuilder
+from .statemachine import StateMachineContext, State, Listener
+from .builder import StateMachineBuilder
+
 
 class FiniteStateMachine:
     """
@@ -72,6 +72,7 @@ class FiniteStateMachine:
         """
         pass
 
+
     def send_event(self, event:str) -> None:
         """
             Description:
@@ -86,6 +87,20 @@ class FiniteStateMachine:
                 returns False.
         """
         pass
+
+
+    def check_event(self, event:str) -> bool:
+        """
+            Description:
+                Checks if the given event can trigger the state machine,
+                but not execute actions.
+
+            Arguments:
+                - event : `str` - event object (str for now).
+            
+            Return:
+                - `bool` : True if the event can trigger the state machine.
+        """
 
 
     """
