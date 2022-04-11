@@ -42,6 +42,6 @@ class Transition:
         return self.__action
 
 
-    def execute(self) -> bool:
+    def execute(self) -> None:
         pass
     

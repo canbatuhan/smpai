@@ -1,5 +1,44 @@
 from .statemachine import StateMachineContext, State, Listener
-from .builder import StateMachineBuilder
+from .parser import JSONParser, YAMLParser
+
+
+class FiniteStateMachineBuilder:
+    """
+        Builder class to build a state machine through
+        configuration files.
+    """
+
+    def __init__(self, config_file_path:str) -> None:
+        """
+            Description:
+                Creates a builder object, which uses parsers
+                to build a `FiniteStateMachine`.
+        """
+        self.__parser = None
+        extension = config_file_path.split('.')[-1]
+        if extension == 'json':
+            self.__parser = JSONParser(config_file_path)
+        if extension == 'yaml' or extension == 'yml':
+            self.__parser = YAMLParser(config_file_path)
+
+
+    def build(self) -> dict:
+        """
+            Description:
+                Creates the components of the state machine
+                by using parsers.
+
+            Return:
+                - `dict` : components of the `FiniteStateMachine`.
+        """
+        return {
+            'machine_id': self.__parser.parse_machine_id(),
+            'auto_startup': self.__parser.parse_auto_startup(),
+            'variables': self.__parser.parse_variables(),
+            'states': self.__parser.parse_states(),
+            'transitions': self.__parser.parse_transitions(),
+            'listener': self.__parser.parse_listener()
+        }
 
 
 class FiniteStateMachine:
@@ -21,7 +60,7 @@ class FiniteStateMachine:
             Return:
                 - `dict` : components of the `FiniteStateMachine`
         """
-        builder = StateMachineBuilder(config_file_path)
+        builder = FiniteStateMachineBuilder(config_file_path)
         components = builder.build()
         return components
 
@@ -29,7 +68,7 @@ class FiniteStateMachine:
     def __init__(self, config_file_path:str=None) -> None:
         """
             Description:
-                Creates an FSM. It ca be built through a
+                Creates an FSM. It can be built through a
                 configuration file.
 
             Arguments:
@@ -70,7 +109,12 @@ class FiniteStateMachine:
                 Initialize the state machine by setting the current
                 state as initial state S_INIT.
         """
-        pass
+        # TODO : execute initial transition
+        # TODO : execute initial listener
+
+        # TODO : set the initial state as current state
+        # TODO : execute entry_action
+        # TODO : execute inner_action
 
 
     def send_event(self, event:str) -> None:
@@ -81,12 +125,17 @@ class FiniteStateMachine:
 
             Arguments:
                 - event : `str` - event object (str for now).
-
-            Return:
-                - `bool` : True if transition is triggered, otherwise
-                returns False.
         """
-        pass
+        # TODO : find corresponding transition, if any
+        # TODO : execute exit_action
+        # TODO : execute transition
+        # TODO : execute listener
+        
+        # TODO : set last_event as event
+        # TODO : set last_state as current_state
+        # TODO : set current_state as destination_state
+        # TODO : execute entry_action
+        # TODO : execute inner_action
 
 
     def check_event(self, event:str) -> bool:
@@ -101,6 +150,7 @@ class FiniteStateMachine:
             Return:
                 - `bool` : True if the event can trigger the state machine.
         """
+        # TODO : find corresponding transition, if any
 
 
     """
