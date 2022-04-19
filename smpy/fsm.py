@@ -26,7 +26,7 @@ class FiniteStateMachine:
         return components
 
 
-    def __init__(self, config_file_path:str=None) -> None:
+    def __init__(self, config_file_path:str) -> None:
         """
             Description:
                 Creates an FSM. It can be built through a
@@ -36,23 +36,14 @@ class FiniteStateMachine:
                 - config_file_path : `str` path of the configration
                 file with extension .json
         """
-        self.__machine_id = str()
-        self.__auto_startup = bool()
-        self.__context = StateMachineContext()
-        self.__states = set()
-        self.__transitions = set()
-        self.__listener = Listener()
-        self.__initial_state = State()
-        self.__final_state = State()
-
-        if config_file_path is not None:
-            components = self.__build_with_config(config_file_path)
-            self.__machine_id = components['machine_id']
-            self.__auto_startup = components['auto_startup']
-            self.__context.set_variables(components['variables'])
-            self.__states = components['states']
-            self.__transitions = components['transitions']
-            self.__listener = components['listener']
+        components = self.__build_with_config(config_file_path)
+        
+        self.__machine_id = components['machine_id']
+        self.__auto_startup = components['auto_startup']
+        self.__context = StateMachineContext(components['variables'])
+        self.__states = components['states']
+        self.__transitions = components['transitions']
+        self.__listener = components['listener']
 
         for state in self.__states:
             if state.get_id() == 'S_INIT':

@@ -9,7 +9,7 @@ class StateMachineContext:
         machine-specific variables (defined by the programmer).
     """
 
-    def __init__(self) -> None:
+    def __init__(self, variables:dict=dict()) -> None:
         """
             Description:
                 Creates a StateMachineContext object.
@@ -17,7 +17,7 @@ class StateMachineContext:
         self.__current_state = None
         self.__last_event = None
         self.__last_transition = None
-        self.__variables = dict()
+        self.__variables = variables
 
 
     """

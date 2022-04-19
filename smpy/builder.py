@@ -15,10 +15,8 @@ class StateMachineBuilder:
         """
         self.__parser = None
         extension = config_file_path.split('.')[-1]
-        if extension == 'json':
-            self.__parser = JSONParser(config_file_path)
-        if extension == 'yaml' or extension == 'yml':
-            self.__parser = YAMLParser(config_file_path)
+        if extension == 'json': self.__parser = JSONParser(config_file_path)
+        elif extension == 'yaml' or extension == 'yml': self.__parser = YAMLParser(config_file_path)
 
 
     def build(self) -> dict:

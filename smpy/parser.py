@@ -172,12 +172,22 @@ class JSONParser(Parser):
                 - file_path : `str` - path of the configuration file.
         """
         self.config = json.load(open(file_path, 'r'))
+
         if 'profile' not in self.config.keys():
-            self.config['profile'] = json.load(open(self.config['profile_config'], 'r'))
-            self.config['variables'] = json.load(open(self.config['variables_config'], 'r'))
-            self.config['states'] = json.load(open(self.config['states_config'], 'r'))
-            self.config['transitions'] = json.load(open(self.config['transitions_config'], 'r'))
-            self.config['listener'] = json.load(open(self.config['listener_config'], 'r'))
+            self.config['profile'] = json.load(
+                open(self.config['profile_config'], 'r'))
+
+            self.config['variables'] = json.load(
+                open(self.config['variables_config'], 'r'))
+
+            self.config['states'] = json.load(
+                open(self.config['states_config'], 'r'))
+
+            self.config['transitions'] = json.load(
+                open(self.config['transitions_config'], 'r'))
+
+            self.config['listener'] = json.load(
+                open(self.config['listener_config'], 'r'))
 
 
 class YAMLParser(Parser):
@@ -192,9 +202,19 @@ class YAMLParser(Parser):
                 - file_path : `str` - path of the configuration file.
         """
         self.config = yaml.safe_load(open(file_path, 'r'))
+
         if 'profile' not in self.config.keys():
-            self.config['profile'] = yaml.safe_load(open(self.config['profile_config'], 'r'))
-            self.config['variables'] = yaml.safe_load(open(self.config['variables_config'], 'r'))
-            self.config['states'] = yaml.safe_load(open(self.config['states_config'], 'r'))
-            self.config['transitions'] = yaml.safe_load(open(self.config['transitions_config'], 'r'))
-            self.config['listener'] = yaml.safe_load(open(self.config['listener_config'], 'r'))
+            self.config['profile'] = yaml.safe_load(
+                open(self.config['profile_config'], 'r'))
+
+            self.config['variables'] = yaml.safe_load(
+                open(self.config['variables_config'], 'r'))
+
+            self.config['states'] = yaml.safe_load(
+                open(self.config['states_config'], 'r'))
+
+            self.config['transitions'] = yaml.safe_load(
+                open(self.config['transitions_config'], 'r'))
+
+            self.config['listener'] = yaml.safe_load(
+                open(self.config['listener_config'], 'r'))
