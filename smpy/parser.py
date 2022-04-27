@@ -10,7 +10,7 @@ class Parser:
     """
 
     def __init__(self) -> None:
-        self.config = dict()
+        self._config = dict()
 
 
     def parse_machine_id(self) -> str:
@@ -21,7 +21,7 @@ class Parser:
             Return: 
                 - `str` : unique ID of the state machine.
         """
-        return self.config['profile']['machine_id']
+        return self._config['profile']['machine_id']
 
     
     def parse_auto_startup(self) -> bool:
@@ -34,7 +34,7 @@ class Parser:
                 - `bool` : True, if the state machine will start
                 as it created, false otherwise.
         """
-        return self.config['profile']['auto_startup']
+        return self._config['profile']['auto_startup']
 
 
     def parse_variables(self) -> dict:
@@ -48,7 +48,7 @@ class Parser:
         """
         variables = dict()
 
-        for variable in self.config['variables']:
+        for variable in self._config['variables']:
             key = variable['key']
             initial_value = variable['value']
             data_type = variable['type']
@@ -78,7 +78,7 @@ class Parser:
         """
         states = set()
 
-        for state in self.config['states']:
+        for state in self._config['states']:
             state_id = state['id']
             entry_action = state['entry_action']
             inner_action = state['inner_action']
@@ -121,7 +121,7 @@ class Parser:
         """
         transitions = set()
 
-        for transition in self.config['transitions']:
+        for transition in self._config['transitions']:
             source = transition['source']
             destination = transition['source']
             event = transition['event']
@@ -152,10 +152,10 @@ class Parser:
 
         if self.config['listener'] is not None:
             listener = Listener(
-                    package = self.config['listener']['package'],
-                    module = self.config['listener']['module'],
-                    function = self.config['listener']['function'],
-                    params = self.config['listener']['params'])
+                    package = self._config['listener']['package'],
+                    module = self._config['listener']['module'],
+                    function = self._config['listener']['function'],
+                    params = self._config['listener']['params'])
 
         return listener
 
@@ -171,23 +171,7 @@ class JSONParser(Parser):
             Arguments:
                 - file_path : `str` - path of the configuration file.
         """
-        self.config = json.load(open(file_path, 'r'))
-
-        if 'profile' not in self.config.keys():
-            self.config['profile'] = json.load(
-                open(self.config['profile_config'], 'r'))
-
-            self.config['variables'] = json.load(
-                open(self.config['variables_config'], 'r'))
-
-            self.config['states'] = json.load(
-                open(self.config['states_config'], 'r'))
-
-            self.config['transitions'] = json.load(
-                open(self.config['transitions_config'], 'r'))
-
-            self.config['listener'] = json.load(
-                open(self.config['listener_config'], 'r'))
+        self._config = json.load(open(file_path, 'r'))
 
 
 class YAMLParser(Parser):
@@ -201,20 +185,18 @@ class YAMLParser(Parser):
             Arguments:
                 - file_path : `str` - path of the configuration file.
         """
-        self.config = yaml.safe_load(open(file_path, 'r'))
+        self._config = yaml.safe_load(open(file_path, 'r'))
 
-        if 'profile' not in self.config.keys():
-            self.config['profile'] = yaml.safe_load(
-                open(self.config['profile_config'], 'r'))
 
-            self.config['variables'] = yaml.safe_load(
-                open(self.config['variables_config'], 'r'))
+class MultiConfigParser(Parser):
+    def __init__(self, file_path:str) -> None:
+        """
+            Description:
+                Creates a `MultiConfigParser` object in order to parse
+                multiple configuration files storing configuration data
+                of a state machine.
 
-            self.config['states'] = yaml.safe_load(
-                open(self.config['states_config'], 'r'))
-
-            self.config['transitions'] = yaml.safe_load(
-                open(self.config['transitions_config'], 'r'))
-
-            self.config['listener'] = yaml.safe_load(
-                open(self.config['listener_config'], 'r'))
+            Arguments:
+                - file_path : `str` - path of the configuration file.
+        """
+        pass

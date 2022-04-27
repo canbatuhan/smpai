@@ -1,7 +1,0 @@
-{
-    "profile_config": "../docs/multiple_files/json/profile.json",
-    "variables_config": "../docs/multiple_files/json/variables.json",
-    "states_config": "../docs/multiple_files/json/states.json",
-    "transitions_config": "../docs/multiple_files/json/transitions.json",
-    "listener_config": "../docs/multiple_files/json/listener.json"
-}
