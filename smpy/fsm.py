@@ -1,5 +1,5 @@
-from .statemachine import StateMachineContext, State, Listener
-from .builder import StateMachineBuilder
+from smpy.components import StateMachineContext, Listener
+from smpy.builder import StateMachineBuilder
 
 
 class FiniteStateMachine:
