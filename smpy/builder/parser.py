@@ -123,7 +123,7 @@ class Parser:
 
         for transition in self.config['transitions']:
             source = transition['source']
-            destination = transition['source']
+            destination = transition['destination']
             event = transition['event']
             action = transition['action']
 

@@ -1,4 +1,5 @@
 import subprocess
+from smpy.components.context import StateMachineContext
 
 
 class Action:
@@ -71,17 +72,21 @@ class Action:
         ).stdout
 
 
-    def execute(self, **kwargs) -> str:
+    def execute(self, context:StateMachineContext) -> str:
         """
             Description:
                 Executes the function embedded in action and returns the output
                 as STRING, just for now.
 
             Arguments:
-                - **kwargs : `dict` - specific function parameters, they must be
-                variables stored in `StateMachineContext.
+                - context : `StateMachineContext` - context of the state machine
 
             Return:
                 - `str` : captured output from the execution of the function.
         """
-        return self.__run_command(self.__generate_command(**kwargs))
+        keyword_arguments = dict()
+        for parameter in self.__params:
+            value = context.get_variables().get(parameter)
+            keyword_arguments[parameter] = value
+
+        return self.__run_command(self.__generate_command(keyword_arguments))

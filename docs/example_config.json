@@ -1,0 +1,77 @@
+{
+    "profile": {
+        "machine_id": "An Example Machine",
+        "auto_startup": true
+    },
+
+    "variables": [
+        {
+            "key": "name", 
+            "value": "Obi-wan Kenobi", 
+            "type": "str"
+        },
+        
+        {
+            "key": "lucky_number", 
+            "value": 42, "type": 
+            "int"
+        },
+
+        {
+            "key": "probability", 
+            "value": 92.3, 
+            "type": "float"
+        }
+    ],
+
+    "states": [
+        {
+            "id": "S_INIT",
+            "entry_action": null,
+            "inner_action": null,
+            "exit_actionn": null
+        },
+
+        {
+            "id": "S_1",
+            "entry_action": null,
+            "inner_action": {
+                "package": "secret",
+                "module": "santa",
+                "function": "play",
+                "params": ["name", "lucky_number", "probability"]
+            },
+            "exit_actionn": null
+        },
+
+        {
+            "id": "S_FINAL",
+            "entry_action": null,
+            "inner_action": null,
+            "exit_actionn": null
+        }
+    ],
+
+    "transitions": [
+        {
+            "source": "S_INIT",
+            "destination": "S_1",
+            "event": "EI1",
+            "action": null
+        },
+
+        {
+            "source": "S_1",
+            "destination": "S_FINAL",
+            "event": "E1F",
+            "action": null
+        }
+    ],
+
+    "listener": {
+        "package": "tell",
+        "module": "me",
+        "function": "how",
+        "params": ["name"]
+    }
+}
