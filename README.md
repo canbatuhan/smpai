@@ -22,7 +22,7 @@ It is a type of state machine which has a finite number of states. In `Finite-St
 
 
 ## Configuring A State Machine
-In smpy, a state machine can be configured through a single file. A state machine can also be configured through multiple configuration files by splitting the state machine configurations into sections.
+`smpy` provides that a state machine can be configured through a single file. A state machine can also be configured through multiple configuration files by splitting the state machine configurations into sections.
 
 ### Configuring State Machines Through A Single File
 Using configuration files is a bit uncomfortable for the programmer, however it is still easy to parse these files in the background. A state machine can be built through a single file easily, but there are some configurations rules that the programmer should consider.
