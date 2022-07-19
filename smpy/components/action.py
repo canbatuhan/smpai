@@ -1,6 +1,4 @@
 import subprocess
-from smpy.components.context import StateMachineContext
-
 
 class Action:
     """
@@ -24,7 +22,6 @@ class Action:
         self.__module = module
         self.__function = function
         self.__params = params
-
 
     def __generate_command(self, **kwargs) -> str:
         """
@@ -51,7 +48,6 @@ class Action:
         return """python -c "from {}.{} import {}; print({}({}))""".format(
             self.__package, self.__module, self.__function, self.__function, arguments)
 
-
     def __run_command(self, runner_cmd) -> str:
         """
             Description:
@@ -71,8 +67,7 @@ class Action:
             universal_newlines=True
         ).stdout
 
-
-    def execute(self, context:StateMachineContext) -> str:
+    def execute(self, context) -> str:
         """
             Description:
                 Executes the function embedded in action and returns the output

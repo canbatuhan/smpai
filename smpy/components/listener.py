@@ -1,6 +1,4 @@
 from .action import Action
-from .state import State
-from .transition import Transition
 
 
 class Listener():
@@ -33,7 +31,7 @@ class Listener():
             )
 
     
-    def __default_execution(self, transition:Transition) -> None:
+    def __default_execution(self, transition) -> None:
         """
             Description:
                 Executes the `Listener` object as default. It basically echos
@@ -53,7 +51,7 @@ class Listener():
                 transition.get_destination().get_id()))
 
 
-    def execute(self, transition:Transition, **kwargs) -> None:
+    def execute(self, transition, **kwargs) -> None:
         """
             Description:
                 Executes the `Listener` object. If a custom `Action` is defined

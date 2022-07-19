@@ -29,7 +29,7 @@
             "id": "S_INIT",
             "entry_action": null,
             "inner_action": null,
-            "exit_actionn": null
+            "exit_action": null
         },
 
         {
@@ -41,14 +41,14 @@
                 "function": "play",
                 "params": ["name", "lucky_number", "probability"]
             },
-            "exit_actionn": null
+            "exit_action": null
         },
 
         {
             "id": "S_FINAL",
             "entry_action": null,
             "inner_action": null,
-            "exit_actionn": null
+            "exit_action": null
         }
     ],
 

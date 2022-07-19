@@ -39,13 +39,13 @@ class StateMachineContext:
     """
         Setters
     """
-    def set_current_state(self, state:State) -> None:
+    def set_current_state(self, state) -> None:
         self.__current_state = state
 
     def set_last_event(self, event:object) -> None:
         self.__last_event = event
 
-    def set_last_transition(self, transition:Transition) -> None:
+    def set_last_transition(self, transition) -> None:
         self.__last_transition = transition
 
     def set_variables(self, variables:dict) -> None:

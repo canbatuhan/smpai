@@ -1,5 +1,3 @@
-from .action import Action
-
 class State:
     """
         Represents the state component of a `FiniteStateMachine`.
@@ -7,7 +5,7 @@ class State:
         `entry_action` and `exit_action`.
     """
 
-    def __init__(self, state_id:str=None, entry_action:Action=None, inner_action:Action=None, exit_action:Action=None) -> None:
+    def __init__(self, state_id:str=None, entry_action=None, inner_action=None, exit_action=None) -> None:
         """
             Description:
                 Creates a State object with given parameters.

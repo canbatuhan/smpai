@@ -7,7 +7,7 @@ class Transition:
         In transitions `Action` objects can be executed.
     """
 
-    def __init__(self, source:State, destination:State, event:object, action:Action=None) -> None:
+    def __init__(self, source, destination, event:object, action=None) -> None:
         """
             Description:
                 Creates a Transition object that changes the current state,
