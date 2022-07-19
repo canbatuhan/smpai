@@ -41,7 +41,7 @@ class Transition:
     def get_action(self) -> Action:
         return self.__action
 
-
     def execute(self) -> None:
+        # TODO : execute the transition action, if anu
         pass
     

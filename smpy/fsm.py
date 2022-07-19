@@ -25,7 +25,6 @@ class FiniteStateMachine:
         components = builder.build()
         return components
 
-
     def __init__(self, config_file_path:str) -> None:
         """
             Description:
@@ -54,7 +53,6 @@ class FiniteStateMachine:
         if self.__auto_startup:
             self.start()
 
-
     def start(self) -> None:
         """
             Description:
@@ -67,7 +65,6 @@ class FiniteStateMachine:
         # TODO : set the initial state as current state
         # TODO : execute entry_action
         # TODO : execute inner_action
-
 
     def send_event(self, event:str) -> None:
         """
@@ -103,7 +100,6 @@ class FiniteStateMachine:
                 - `bool` : True if the event can trigger the state machine.
         """
         # TODO : find corresponding transition, if any
-
 
     """
         Getters

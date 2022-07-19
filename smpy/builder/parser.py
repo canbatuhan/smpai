@@ -12,7 +12,6 @@ class Parser:
     def __init__(self) -> None:
         self.config = dict()
 
-
     def parse_machine_id(self) -> str:
         """
             Description:
@@ -23,7 +22,6 @@ class Parser:
         """
         return self.config['profile']['machine_id']
 
-    
     def parse_auto_startup(self) -> bool:
         """
             Description:
@@ -35,7 +33,6 @@ class Parser:
                 as it created, false otherwise.
         """
         return self.config['profile']['auto_startup']
-
 
     def parse_variables(self) -> dict:
         """
@@ -65,7 +62,6 @@ class Parser:
             variables[key] = initial_value
 
         return variables
-
 
     def parse_states(self) -> set:
         """
@@ -109,7 +105,6 @@ class Parser:
 
         return states
 
-
     def parse_transitions(self) -> set:
         """
             Description:
@@ -137,7 +132,6 @@ class Parser:
             transitions.add(Transition(source, destination, event, action))
         
         return transitions
-
 
     def parse_listener(self) -> Listener:
         """

@@ -13,8 +13,8 @@
         
         {
             "key": "lucky_number", 
-            "value": 42, "type": 
-            "int"
+            "value": 42,
+            "type": "int"
         },
 
         {

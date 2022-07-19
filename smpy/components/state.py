@@ -21,7 +21,6 @@ class State:
         self.__inner_action = inner_action
         self.__exit_action = exit_action
 
-
     """
         Getters
     """
