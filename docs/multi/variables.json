@@ -1,0 +1,19 @@
+[
+    {
+        "key": "name", 
+        "value": "Obi-wan Kenobi", 
+        "type": "str"
+    },
+    
+    {
+        "key": "lucky_number", 
+        "value": 42,
+        "type": "int"
+    },
+
+    {
+        "key": "probability", 
+        "value": 92.3, 
+        "type": "float"
+    }
+]

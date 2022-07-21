@@ -86,7 +86,6 @@ class FiniteStateMachine:
         # TODO : execute entry_action
         # TODO : execute inner_action
 
-
     def check_event(self, event:str) -> bool:
         """
             Description:

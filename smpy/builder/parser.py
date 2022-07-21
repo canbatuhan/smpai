@@ -1,5 +1,7 @@
 import json
+import os
 import yaml
+import xml.etree.ElementTree as ET
 from smpy.components import Action, Listener, State, Transition
 
 
@@ -193,4 +195,17 @@ class MultiConfigParser(Parser):
             Arguments:
                 - file_path : `str` - path of the configuration file.
         """
-        pass
+        self.config = dict()
+        config_tree = ET.parse(file_path)
+        fsm = config_tree.getroot()
+
+        for config_part in fsm:
+            key = config_part.tag
+            config_file_path = config_part.text
+            extension = config_file_path.split('.')[-1]
+            
+            if extension == 'json':
+                self.config[key] = json.load(open(config_file_path, 'r'))
+
+            elif extension == 'yaml' or extension == 'yml':
+                self.config[key] = yaml.safe_load(open(config_file_path, 'r'))

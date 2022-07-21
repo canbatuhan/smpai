@@ -1,0 +1,9 @@
+- source: S_INIT
+  destination: S_1
+  event: "EI1"
+  action: null
+
+- source: S_1
+  destination: S_FINAL
+  event: E1F
+  action: null

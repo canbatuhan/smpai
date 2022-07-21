@@ -1,0 +1,27 @@
+[
+    {
+        "id": "S_INIT",
+        "entry_action": null,
+        "inner_action": null,
+        "exit_action": null
+    },
+
+    {
+        "id": "S_1",
+        "entry_action": null,
+        "inner_action": {
+            "package": "secret",
+            "module": "santa",
+            "function": "play",
+            "params": ["name", "lucky_number", "probability"]
+        },
+        "exit_action": null
+    },
+
+    {
+        "id": "S_FINAL",
+        "entry_action": null,
+        "inner_action": null,
+        "exit_action": null
+    }
+]

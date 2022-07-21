@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<fsm>
+    <profile>docs/multi/profile.yaml</profile>
+    <variables>docs/multi/variables.json</variables>
+    <states>docs/multi/states.json</states>
+    <transitions>docs/multi/transitions.yaml</transitions>
+    <listener>docs/multi/listener.yaml</listener>
+</fsm>
