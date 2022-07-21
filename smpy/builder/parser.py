@@ -1,5 +1,4 @@
-import json
-import os
+import jsonref
 import yaml
 import xml.etree.ElementTree as ET
 from smpy.components import Action, Listener, State, Transition
@@ -118,9 +117,30 @@ class Parser:
         """
         transitions = set()
 
+        def __parse_single_action(action:dict) -> Action:
+            if action is not None:
+                action = Action(
+                    package = action['package'],
+                    module = action['module'],
+                    function = action['function'],
+                    params = action['params'])
+            return action
+
         for transition in self.config['transitions']:
-            source = transition['source']
-            destination = transition['destination']
+            src_config = transition['source']
+            source = State(
+                state_id = src_config['id'],
+                entry_action = __parse_single_action(src_config['entry_action']),
+                inner_action = __parse_single_action(src_config['inner_action']),
+                exit_action = __parse_single_action(src_config['exit_action']))
+
+            dst_config = transition['destination']
+            destination = State(
+                state_id = dst_config['id'],
+                entry_action = __parse_single_action(dst_config['entry_action']),
+                inner_action = __parse_single_action(dst_config['inner_action']),
+                exit_action = __parse_single_action(dst_config['exit_action']))
+
             event = transition['event']
             action = transition['action']
 
@@ -167,7 +187,7 @@ class JSONParser(Parser):
             Arguments:
                 - file_path : `str` - path of the configuration file.
         """
-        self.config = json.load(open(file_path, 'r'))
+        self.config = jsonref.load(open(file_path, 'r'))
 
 
 class YAMLParser(Parser):
@@ -205,7 +225,7 @@ class MultiConfigParser(Parser):
             extension = config_file_path.split('.')[-1]
             
             if extension == 'json':
-                self.config[key] = json.load(open(config_file_path, 'r'))
+                self.config[key] = jsonref.load(open(config_file_path, 'r'))
 
             elif extension == 'yaml' or extension == 'yml':
                 self.config[key] = yaml.safe_load(open(config_file_path, 'r'))

@@ -54,29 +54,13 @@ class FiniteStateMachine:
         if self.__auto_startup:
             self.start()
 
-    def __find_state(self, state_id:str) -> State:
-        """
-            Description:
-                Finds `State` object from state set
-            
-            Arguments:
-                - state_id : id of the `State` object
-
-            Returns: 
-                - state : `State` object
-        """
-        for state in self.__states:
-            if state_id == state.get_id():
-                return state
-        return None
-
     def start(self) -> None:
         """
             Description:
                 Initialize the state machine by setting the current
                 state as initial state S_INIT.
         """
-        initial_transition = Transition(None, self.__initial_state.get_id(), "INIT", None)
+        initial_transition = Transition(None, self.__initial_state, "INIT", None)
         initial_transition.execute(self.__context)        
         self.__listener.execute(initial_transition)
 
@@ -102,12 +86,12 @@ class FiniteStateMachine:
         """
         transition = None
         for transition_ in self.__transitions:
-            if transition_.get_source() == self.__context.get_current_state().get_id():
+            if transition_.get_source() == self.__context.get_current_state():
                 if transition_.get_event() == event:
                     transition = transition_
                     break
 
-        # TODO : Some explanation...
+        # TODO : Some explanation is needed
         if transition == None: pass
 
         state_actions = self.__context.get_current_state().get_actions()
@@ -119,7 +103,7 @@ class FiniteStateMachine:
         
         self.__context.set_last_event(event)
         self.__context.set_last_transition(transition)
-        self.__context.set_current_state(self.__find_state(transition.get_destination()))
+        self.__context.set_current_state(transition.get_destination())
 
         state_actions = self.__context.get_current_state().get_actions()
         if state_actions['entry_action'] != None:

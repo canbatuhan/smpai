@@ -1,5 +1,10 @@
 import subprocess
 
+# TODO : function executions must be more modular
+# TODO : params (state machine variables) can be updated
+# TODO : outputs (if there any) must be indicated
+# TODO : a .json format output might be required
+
 class Action:
     """
         Represents the action component of a `FiniteStateMachine`.

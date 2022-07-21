@@ -54,15 +54,15 @@
 
     "transitions": [
         {
-            "source": "S_INIT",
-            "destination": "S_1",
+            "source": {"$ref": "#/states/0"},
+            "destination": {"$ref": "#/states/1"},
             "event": "EI1",
             "action": null
         },
 
         {
-            "source": "S_1",
-            "destination": "S_FINAL",
+            "source": {"$ref": "#/states/1"},
+            "destination": {"$ref": "#/states/2"},
             "event": "E1F",
             "action": null
         }

@@ -1,5 +1,9 @@
 from .action import Action
 
+# TODO : function executions must be more modular
+# TODO : params (state machine variables) can be updated
+# TODO : outputs (if there any) must be indicated
+# TODO : a .json format output might be required
 
 class Listener():
     """
@@ -41,13 +45,13 @@ class Listener():
         """
         if transition.get_source() == None:
             print("{}\t-- {} -->\t{}".format(
-                " ", "INIT", transition.get_destination()))
+                " ", "INIT", transition.get_destination().get_id()))
 
         else:
             print("{}\t-- {} -->\t{}".format(
-                transition.get_source(),
+                transition.get_source().get_id(),
                 transition.get_event(),
-                transition.get_destination()))
+                transition.get_destination().get_id()))
 
     def execute(self, transition, **kwargs) -> None:
         """
