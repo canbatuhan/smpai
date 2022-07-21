@@ -36,9 +36,9 @@
             "id": "S_1",
             "entry_action": null,
             "inner_action": {
-                "package": "secret",
-                "module": "santa",
-                "function": "play",
+                "package": "tests",
+                "module": "sample_module",
+                "function": "play_secret_santa",
                 "params": ["name", "lucky_number", "probability"]
             },
             "exit_action": null
@@ -69,9 +69,9 @@
     ],
 
     "listener": {
-        "package": "tell",
-        "module": "me",
-        "function": "how",
+        "package": "tests",
+        "module": "sample_module",
+        "function": "tell_me_how",
         "params": ["name"]
     }
 }

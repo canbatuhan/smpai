@@ -41,13 +41,13 @@ class Listener():
         """
         if transition.get_source() == None:
             print("{}\t-- {} -->\t{}".format(
-                " ", "INIT", transition.get_destination().get_id()))
+                " ", "INIT", transition.get_destination()))
 
         else:
             print("{}\t-- {} -->\t{}".format(
-                transition.get_source().get_id(),
+                transition.get_source(),
                 transition.get_event(),
-                transition.get_destination().get_id()))
+                transition.get_destination()))
 
     def execute(self, transition, **kwargs) -> None:
         """
@@ -63,5 +63,4 @@ class Listener():
                 variables stored in `StateMachineContext.
 
         """
-        if self.__action != None: print(self.__action.execute(transition=transition, **kwargs))
-        else: self.__default_execution(transition)
+        self.__default_execution(transition)

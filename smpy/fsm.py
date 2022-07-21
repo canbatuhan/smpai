@@ -1,5 +1,6 @@
-from smpy.components import StateMachineContext, Listener
+from smpy.components import StateMachineContext, Listener, Transition
 from smpy.builder import StateMachineBuilder
+from smpy.components.state import State
 
 
 class FiniteStateMachine:
@@ -53,20 +54,44 @@ class FiniteStateMachine:
         if self.__auto_startup:
             self.start()
 
+    def __find_state(self, state_id:str) -> State:
+        """
+            Description:
+                Finds `State` object from state set
+            
+            Arguments:
+                - state_id : id of the `State` object
+
+            Returns: 
+                - state : `State` object
+        """
+        for state in self.__states:
+            if state_id == state.get_id():
+                return state
+        return None
+
     def start(self) -> None:
         """
             Description:
                 Initialize the state machine by setting the current
                 state as initial state S_INIT.
         """
-        # TODO : execute initial transition
-        # TODO : execute initial listener
+        initial_transition = Transition(None, self.__initial_state.get_id(), "INIT", None)
+        initial_transition.execute(self.__context)        
+        self.__listener.execute(initial_transition)
 
-        # TODO : set the initial state as current state
-        # TODO : execute entry_action
-        # TODO : execute inner_action
+        self.__context.set_last_event("INIT")
+        self.__context.set_last_transition(initial_transition)
+        self.__context.set_current_state(self.__initial_state)
 
-    def send_event(self, event:str) -> None:
+        state_actions = self.__initial_state.get_actions()
+        if state_actions['entry_action'] != None:
+            state_actions['entry_action'].execute(self.__context)
+
+        if state_actions['inner_action'] != None:
+            state_actions['inner_action'].execute(self.__context)
+
+    def send_event(self, event:object) -> None:
         """
             Description:
                 Sends an event to the state machine and triggers a
@@ -75,16 +100,33 @@ class FiniteStateMachine:
             Arguments:
                 - event : `str` - event object (str for now).
         """
-        # TODO : find corresponding transition, if any
-        # TODO : execute exit_action
-        # TODO : execute transition
-        # TODO : execute listener
+        transition = None
+        for transition_ in self.__transitions:
+            if transition_.get_source() == self.__context.get_current_state().get_id():
+                if transition_.get_event() == event:
+                    transition = transition_
+                    break
+
+        # TODO : Some explanation...
+        if transition == None: pass
+
+        state_actions = self.__context.get_current_state().get_actions()
+        if state_actions['exit_action'] != None:
+            state_actions['exit_action'].execute(self.__context)
+
+        transition.execute(self.__context)
+        self.__listener.execute(transition)
         
-        # TODO : set last_event as event
-        # TODO : set last_state as current_state
-        # TODO : set current_state as destination_state
-        # TODO : execute entry_action
-        # TODO : execute inner_action
+        self.__context.set_last_event(event)
+        self.__context.set_last_transition(transition)
+        self.__context.set_current_state(self.__find_state(transition.get_destination()))
+
+        state_actions = self.__context.get_current_state().get_actions()
+        if state_actions['entry_action'] != None:
+            state_actions['entry_action'].execute(self.__context)
+
+        if state_actions['inner_action'] != None:
+            state_actions['inner_action'].execute(self.__context)
 
     def check_event(self, event:str) -> bool:
         """
@@ -98,7 +140,11 @@ class FiniteStateMachine:
             Return:
                 - `bool` : True if the event can trigger the state machine.
         """
-        # TODO : find corresponding transition, if any
+        for transition_ in self.__transitions:
+            if transition_.get_source() == self.__context.get_current_state():
+                if transition_.get_event() == event:
+                    return True
+        return False
 
     """
         Getters

@@ -1,5 +1,5 @@
-package: tell
-module: me
-function: how
+package: tests
+module: samplepackage
+function: tell_me_how
 params:
   - name

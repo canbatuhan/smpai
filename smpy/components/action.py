@@ -23,7 +23,7 @@ class Action:
         self.__function = function
         self.__params = params
 
-    def __generate_command(self, **kwargs) -> str:
+    def __generate_command(self, *args) -> str:
         """
             Description:
                 Generates a one-line python script to run the given function
@@ -36,14 +36,17 @@ class Action:
             Return:
                 - `str` : generated command to run the user-defined function.
         """
+        kwargs = args[0]
         arguments = ""
+
         for key, value in kwargs.items():
-            if isinstance(value, str):
-                arguments += "{}='{}',".format(
-                    key, value)
-            else:
-                arguments += "{}={},".format(
-                    key, value)
+            if key in self.__params:
+                if isinstance(value, str):
+                    arguments += "{}='{}',".format(
+                        key, value)
+                else:
+                    arguments += "{}={},".format(
+                        key, value)
 
         return """python -c "from {}.{} import {}; print({}({}))""".format(
             self.__package, self.__module, self.__function, self.__function, arguments)
@@ -84,4 +87,5 @@ class Action:
             value = context.get_variables().get(parameter)
             keyword_arguments[parameter] = value
 
+        print(self.__run_command(self.__generate_command(keyword_arguments)))
         return self.__run_command(self.__generate_command(keyword_arguments))
