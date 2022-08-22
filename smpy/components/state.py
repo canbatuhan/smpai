@@ -25,16 +25,6 @@ class State:
         return hash(self.__state_id)
 
     def __eq__(self, __o: object) -> bool:
-        """
-            Description:
-                Checks if two `State` objects are equal or not
-
-            Arguments:
-                __o : `object` to compare with `State`
-
-            Returns:
-                `bool` : indicating the equality of items 
-        """
         if isinstance(__o, State):
             if __o.get_id() == self.__state_id:
                 return True

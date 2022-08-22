@@ -1,4 +1,5 @@
 import subprocess
+import json
 
 # TODO : function executions must be more modular
 # TODO : params (state machine variables) can be updated
@@ -75,7 +76,7 @@ class Action:
             universal_newlines=True
         ).stdout
 
-    def execute(self, context) -> str:
+    def execute(self, context) -> dict:
         """
             Description:
                 Executes the function embedded in action and returns the output
@@ -85,12 +86,19 @@ class Action:
                 - context : `StateMachineContext` - context of the state machine
 
             Return:
-                - `str` : captured output from the execution of the function.
+                - `dict` : dictionary stores used variables and the output
         """
         keyword_arguments = dict()
         for parameter in self.__params:
             value = context.get_variables().get(parameter)
             keyword_arguments[parameter] = value
 
-        print(self.__run_command(self.__generate_command(keyword_arguments)))
-        return self.__run_command(self.__generate_command(keyword_arguments))
+        try:
+            runner_command = self.__generate_command(keyword_arguments)
+            raw_output = self.__run_command(runner_command)
+            raw_output = raw_output.replace('\'', '\"')
+            decoded_output = json.loads(raw_output)
+            return decoded_output
+
+        except:
+            return None

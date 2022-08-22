@@ -26,6 +26,22 @@ class FiniteStateMachine:
         components = builder.build()
         return components
 
+    def __update_after_execution(self, results) -> None:
+        """
+            Description:
+                Updates the state machine variables after an action
+                is executed
+            
+            Arguments:
+                - results : `dict` - dictionary stores the updated
+                variables and output
+        """
+        if results is None:
+            return
+
+        for key, value in results.items():
+            self.__context.get_variables()[key] = value
+
     def __init__(self, config_file_path:str) -> None:
         """
             Description:
@@ -60,20 +76,28 @@ class FiniteStateMachine:
                 Initialize the state machine by setting the current
                 state as initial state S_INIT.
         """
+        # Execute initial transition
         initial_transition = Transition(None, self.__initial_state, "INIT", None)
-        initial_transition.execute(self.__context)        
+        results = initial_transition.execute(self.__context)
+        self.__update_after_execution(results)        
+
+        # Execute listener
         self.__listener.execute(initial_transition)
 
+        # Update variables
         self.__context.set_last_event("INIT")
         self.__context.set_last_transition(initial_transition)
         self.__context.set_current_state(self.__initial_state)
 
+        # Execute the initial state actions in order
         state_actions = self.__initial_state.get_actions()
         if state_actions['entry_action'] != None:
-            state_actions['entry_action'].execute(self.__context)
+            results = state_actions['entry_action'].execute(self.__context)
+            self.__update_after_execution(results)
 
         if state_actions['inner_action'] != None:
-            state_actions['inner_action'].execute(self.__context)
+            results = state_actions['inner_action'].execute(self.__context)
+            self.__update_after_execution(results)
 
     def send_event(self, event:object) -> None:
         """
@@ -84,33 +108,45 @@ class FiniteStateMachine:
             Arguments:
                 - event : `str` - event object (str for now).
         """
+        # Seek for a transition
         transition = None
         for transition_ in self.__transitions:
             if transition_.get_source() == self.__context.get_current_state():
                 if transition_.get_event() == event:
                     transition = transition_
                     break
-
+        
+        # If not found pass
         # TODO : Some explanation is needed
         if transition == None: pass
 
+        # If found, execute exit action
         state_actions = self.__context.get_current_state().get_actions()
         if state_actions['exit_action'] != None:
-            state_actions['exit_action'].execute(self.__context)
+            results = state_actions['exit_action'].execute(self.__context)
+            self.__update_after_execution(results)
 
-        transition.execute(self.__context)
+        # Execute transition
+        results = transition.execute(self.__context)
+        self.__update_after_execution(results)
+
+        # Execute Listener
         self.__listener.execute(transition)
         
+        # Update variables
         self.__context.set_last_event(event)
         self.__context.set_last_transition(transition)
         self.__context.set_current_state(transition.get_destination())
 
+        # Execute actions in order
         state_actions = self.__context.get_current_state().get_actions()
         if state_actions['entry_action'] != None:
-            state_actions['entry_action'].execute(self.__context)
+            results = state_actions['entry_action'].execute(self.__context)
+            self.__update_after_execution(results)
 
         if state_actions['inner_action'] != None:
-            state_actions['inner_action'].execute(self.__context)
+            results = state_actions['inner_action'].execute(self.__context)
+            self.__update_after_execution(results)
 
     def check_event(self, event:str) -> bool:
         """

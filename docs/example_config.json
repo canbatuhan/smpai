@@ -62,16 +62,18 @@
 
         {
             "source": {"$ref": "#/states/1"},
+            "destination": {"$ref": "#/states/0"},
+            "event": "E1I",
+            "action": null
+        },
+
+        {
+            "source": {"$ref": "#/states/1"},
             "destination": {"$ref": "#/states/2"},
             "event": "E1F",
             "action": null
         }
     ],
 
-    "listener": {
-        "package": "tests",
-        "module": "sample_module",
-        "function": "tell_me_how",
-        "params": ["name"]
-    }
+    "listener": null
 }
