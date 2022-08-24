@@ -1,6 +1,6 @@
-from smpy.components import StateMachineContext, Listener, Transition
-from smpy.builder import StateMachineBuilder
-from smpy.components.state import State
+from smpai.components import StateMachineContext, Listener, Transition
+from smpai.builder import StateMachineBuilder
+from smpai.components.state import State
 
 
 class FiniteStateMachine:

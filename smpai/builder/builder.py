@@ -1,4 +1,4 @@
-from smpy.builder.parser import JSONParser, YAMLParser, MultiConfigParser
+from smpai.builder.parser import JSONParser, YAMLParser, MultiConfigParser
 
 
 class StateMachineBuilder:

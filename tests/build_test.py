@@ -1,6 +1,6 @@
 import sys
 sys.path.append('.')
-from smpy import FiniteStateMachine
+from smpai import FiniteStateMachine
 
 machine = FiniteStateMachine('docs/multi_config.xml')
 print("[MACHINE ID] -", machine.get_machine_id())

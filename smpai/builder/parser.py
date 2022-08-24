@@ -1,7 +1,7 @@
 import jsonref
 import yaml
 import xml.etree.ElementTree as ET
-from smpy.components import Action, Listener, State, Transition
+from smpai.components import Action, Listener, State, Transition
 
 
 class Parser:

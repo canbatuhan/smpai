@@ -1,14 +1,14 @@
 from setuptools import setup
 
 setup(
-    name='sm-py',
+    name='smpai',
     version='0.1.0a0',    
-    description='smpy - A State Machine Framework',
-    url='https://github.com/canbatuhan/sm-py',
+    description='smpai - A State Machine Framework',
+    url='https://github.com/canbatuhan/smpai',
     author='Batuhan Can',
     author_email='batuhanosmancan@gmail.com',
     license='MIT',
-    packages=['smpy'],
+    packages=['smpai'],
 
     install_requires=[],
 
