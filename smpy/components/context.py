@@ -19,6 +19,7 @@ class StateMachineContext:
         self.__last_transition = None
         self.__variables = variables
 
+
     """
         Getters
     """
@@ -33,6 +34,7 @@ class StateMachineContext:
 
     def get_variables(self) -> dict: 
         return self.__variables
+
 
     """
         Setters

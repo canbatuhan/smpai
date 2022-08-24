@@ -64,6 +64,7 @@ class Parser:
 
         return variables
 
+
     def parse_states(self) -> set:
         """
             Description:
@@ -105,6 +106,7 @@ class Parser:
             states.add(State(state_id, entry_action, inner_action, exit_action))
 
         return states
+
 
     def parse_transitions(self) -> set:
         """
@@ -155,6 +157,7 @@ class Parser:
         
         return transitions
 
+
     def parse_listener(self) -> Listener:
         """
             Description:
@@ -176,6 +179,7 @@ class Parser:
         return listener
 
 
+
 class JSONParser(Parser):
     def __init__(self, file_path:str) -> None:
         """
@@ -190,6 +194,7 @@ class JSONParser(Parser):
         self.config = jsonref.load(open(file_path, 'r'))
 
 
+
 class YAMLParser(Parser):
     def __init__(self, file_path:str) -> None:
         """
@@ -202,6 +207,7 @@ class YAMLParser(Parser):
                 - file_path : `str` - path of the configuration file.
         """
         self.config = yaml.safe_load(open(file_path, 'r'))
+
 
 
 class MultiConfigParser(Parser):

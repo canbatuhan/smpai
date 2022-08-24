@@ -29,6 +29,7 @@ class Action:
         self.__function = function
         self.__params = params
 
+
     def __generate_command(self, *args) -> str:
         """
             Description:
@@ -57,6 +58,7 @@ class Action:
         return """python -c "from {}.{} import {}; print({}({}))""".format(
             self.__package, self.__module, self.__function, self.__function, arguments)
 
+
     def __run_command(self, runner_cmd) -> str:
         """
             Description:
@@ -75,6 +77,7 @@ class Action:
             shell=True,
             universal_newlines=True
         ).stdout
+
 
     def execute(self, context) -> dict:
         """

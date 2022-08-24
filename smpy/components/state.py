@@ -21,14 +21,17 @@ class State:
         self.__inner_action = inner_action
         self.__exit_action = exit_action
 
+
     def __hash__(self) -> int:
         return hash(self.__state_id)
+
 
     def __eq__(self, __o: object) -> bool:
         if isinstance(__o, State):
             if __o.get_id() == self.__state_id:
                 return True
         return False
+
 
     """
         Getters

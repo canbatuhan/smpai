@@ -9,39 +9,6 @@ class FiniteStateMachine:
         `State`, `Transition`, `Action`, `Event` and `Listener` objects.
     """
 
-    def __build_with_config(self, config_file_path:str) -> dict:
-        """
-            Description:
-                Builds the FSM with the given configuration, read
-                from the configuration file
-
-            Arguments:
-                - config_file_path : `str` - configuration file for
-                the `FiniteStateMachine`
-
-            Return:
-                - `dict` : components of the `FiniteStateMachine`
-        """
-        builder = StateMachineBuilder(config_file_path)
-        components = builder.build()
-        return components
-
-    def __update_after_execution(self, results) -> None:
-        """
-            Description:
-                Updates the state machine variables after an action
-                is executed
-            
-            Arguments:
-                - results : `dict` - dictionary stores the updated
-                variables and output
-        """
-        if results is None:
-            return
-
-        for key, value in results.items():
-            self.__context.get_variables()[key] = value
-
     def __init__(self, config_file_path:str) -> None:
         """
             Description:
@@ -62,13 +29,67 @@ class FiniteStateMachine:
         self.__listener = components['listener']
 
         for state in self.__states:
-            if state.get_id() == 'S_INIT':
-                self.__initial_state = state
-            elif state.get_id() == 'S_FINAL':
-                self.__final_state = state
+            if state.get_id() == 'S_INIT': self.__initial_state = state
+            elif state.get_id() == 'S_FINAL': self.__final_state = state
+        if self.__auto_startup: self.start()
 
-        if self.__auto_startup:
-            self.start()
+
+    def __build_with_config(self, config_file_path:str) -> dict:
+        """
+            Description:
+                Builds the FSM with the given configuration, read
+                from the configuration file
+
+            Arguments:
+                - config_file_path : `str` - configuration file for
+                the `FiniteStateMachine`
+
+            Return:
+                - `dict` : components of the `FiniteStateMachine`
+        """
+        builder = StateMachineBuilder(config_file_path)
+        components = builder.build()
+        return components
+
+
+    def __execute_and_update(self, executable) -> None:
+        """
+            Description:
+                Executes and executable object then updates
+                state machine variables
+  
+            Arguments:
+                - executable : `Action` or `Transition` - will be
+                executed
+        """
+        results = executable.execute(self.__context)   
+        if results is None: return
+        for key, value in results.items(): self.__context.get_variables()[key] = value
+
+
+    def __update_variables(self, event, transition:Transition, state:State) -> None:
+        """
+            Description:
+                Updates the state machine variables last event, last transition
+                and current state
+            
+            Arguments:
+                - event : `Any` - event triggered the transition
+                - transition : `Transition` - last triggered transition
+                - state : `State` current state of the state machine
+        """
+        self.__context.set_last_event(event)
+        self.__context.set_last_transition(transition)
+        self.__context.set_current_state(state)
+
+
+    def __execute_before_transition(self):
+        pass
+
+
+    def __execute_after_transition(self):
+        pass
+
 
     def start(self) -> None:
         """
@@ -76,28 +97,24 @@ class FiniteStateMachine:
                 Initialize the state machine by setting the current
                 state as initial state S_INIT.
         """
-        # Execute initial transition
         initial_transition = Transition(None, self.__initial_state, "INIT", None)
-        results = initial_transition.execute(self.__context)
-        self.__update_after_execution(results)        
+
+        # Execute transition
+        self.__execute_and_update(initial_transition)
 
         # Execute listener
         self.__listener.execute(initial_transition)
 
         # Update variables
-        self.__context.set_last_event("INIT")
-        self.__context.set_last_transition(initial_transition)
-        self.__context.set_current_state(self.__initial_state)
+        self.__update_variables("INIT", initial_transition, self.__initial_state)
 
         # Execute the initial state actions in order
-        state_actions = self.__initial_state.get_actions()
+        state_actions = self.__context.get_current_state().get_actions()
         if state_actions['entry_action'] != None:
-            results = state_actions['entry_action'].execute(self.__context)
-            self.__update_after_execution(results)
-
+            self.__execute_and_update(state_actions['entry_action'])
         if state_actions['inner_action'] != None:
-            results = state_actions['inner_action'].execute(self.__context)
-            self.__update_after_execution(results)
+            self.__execute_and_update(state_actions['inner_action'])
+
 
     def send_event(self, event:object) -> None:
         """
@@ -123,30 +140,24 @@ class FiniteStateMachine:
         # If found, execute exit action
         state_actions = self.__context.get_current_state().get_actions()
         if state_actions['exit_action'] != None:
-            results = state_actions['exit_action'].execute(self.__context)
-            self.__update_after_execution(results)
+            self.__execute_and_update(state_actions['exit_action'])
 
         # Execute transition
-        results = transition.execute(self.__context)
-        self.__update_after_execution(results)
+        self.__execute_and_update(transition)
 
         # Execute Listener
         self.__listener.execute(transition)
         
         # Update variables
-        self.__context.set_last_event(event)
-        self.__context.set_last_transition(transition)
-        self.__context.set_current_state(transition.get_destination())
+        self.__update_variables(event, transition, transition.get_destination())
 
         # Execute actions in order
         state_actions = self.__context.get_current_state().get_actions()
         if state_actions['entry_action'] != None:
-            results = state_actions['entry_action'].execute(self.__context)
-            self.__update_after_execution(results)
-
+            self.__execute_and_update(state_actions['entry_action'])
         if state_actions['inner_action'] != None:
-            results = state_actions['inner_action'].execute(self.__context)
-            self.__update_after_execution(results)
+            self.__execute_and_update(state_actions['inner_action'])
+
 
     def check_event(self, event:str) -> bool:
         """
@@ -165,6 +176,7 @@ class FiniteStateMachine:
                 if transition_.get_event() == event:
                     return True
         return False
+
 
     """
         Getters

@@ -34,6 +34,7 @@ class Listener():
                 params=params
             )
 
+
     def __default_execution(self, transition) -> None:
         """
             Description:
@@ -52,6 +53,7 @@ class Listener():
                 transition.get_source().get_id(),
                 transition.get_event(),
                 transition.get_destination().get_id()))
+
 
     def execute(self, transition, **kwargs) -> None:
         """

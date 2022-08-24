@@ -19,6 +19,7 @@ class StateMachineBuilder:
         elif extension == 'yaml' or extension == 'yml': self.__parser = YAMLParser(config_file_path)
         elif extension == 'xml': self.__parser = MultiConfigParser(config_file_path)
 
+
     def build(self) -> dict:
         """
             Description:
