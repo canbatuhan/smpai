@@ -1,7 +1,10 @@
 import jsonref
 import yaml
 import xml.etree.ElementTree as ET
-from smpai.components import Action, Listener, State, Transition
+from .action import Action
+from .listener import Listener
+from .state import State
+from .transition import Transition
 
 
 class Parser:
