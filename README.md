@@ -31,3 +31,15 @@ In `smpy`, there are built-in parsers written for `JSON` and `YAML` files. There
 
 ### Configuring State Machines Through Multiple Files
 For more complex state machines, using multiple configuration files would be more easy for the programmer to configure a state machine. Single configuration files for each section such as `states.yaml`, `transitions.yaml`, etc can be configured, later these configuration files can be imported in a main configuration file. Multiple configuration files are handled with an `XML` parser. With this built-in parser, configuration files with different extension can bu used together.
+
+
+## Building In The Background
+In order to build state machines, `smpy` parses configuration inputs given by the programmer. State machine is built when the programmer create a `StateMachine` object. Building a state machine is not a consideration for the user in `smpy`. However as a further step, a builder class will be written to make the programmer able to built a statemachine with code.
+
+
+## Using Custom Actions
+`smpy` provides an option for the programmer to use pre-written function in a state machine. In the configuration file, package, module and function name must be given to use a function as a executable object (`Action` or `Transition`) in the state machine
+
+
+## Running A State Machine
+For now there is only one type of a state machine in `smpy` called `FiniteStateMachine`. In this type of state machine, transitions are triggered by events, therefore while running the state machine. User should send events to the state machine. Also there is an option such that the programmer checks if the incoming event triggers the state machine or not. 
