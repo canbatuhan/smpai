@@ -1,5 +1,5 @@
-# sm-py - State Machine Framework
-`sm-py` is a framework to configure, build and run different types of state machines with custom states and custom actions. In this framework, aim is to provide an environment, in where the programmer is able to;
+# smpai - State Machine Framework
+`smpai` is a framework to configure, build and run different types of state machines with custom states and custom actions. In this framework, aim is to provide an environment, in where the programmer is able to;
 
 - Configure state machines easily, through configuration files such as `JSON` and `YAML`.
 - Build state machines in the background, so the programmer will not be dealing with any unnecessary coding.
@@ -15,14 +15,14 @@
 
 
 ## Different Types Of State Machines
-For now, there is only one type of state machine defined in `sm-py`, named `FiniteStateMachine`.
+For now, there is only one type of state machine defined in `smpai`, named `FiniteStateMachine`.
 
 ### Finite-State Machine
 It is a type of state machine which has a finite number of states. In `FiniteStateMachine`, transitions are triggered by events. Therefore, it is better to use this type of a state machine in the programs that are event-driven.
 
 
 ## Configuring A State Machine
-`sm-py` provides that a state machine can be configured through a single file. A state machine can also be configured through multiple configuration files by splitting the state machine configurations into sections.
+`smpai` provides that a state machine can be configured through a single file. A state machine can also be configured through multiple configuration files by splitting the state machine configurations into sections.
 
 ### Configuring State Machines Through A Single File
 Using configuration files is a bit uncomfortable for the programmer, however it is still easy to parse these files in the background. A state machine can be built through a single file easily, but there are some configurations rules that the programmer should consider.
@@ -34,12 +34,12 @@ For more complex state machines, using multiple configuration files would be mor
 
 
 ## Building In The Background
-In order to build state machines, `sm-py` parses configuration inputs given by the programmer. State machine is built when the programmer create a `StateMachine` object. Building a state machine is not a consideration for the user in `sm-py`. However as a further step, a builder class will be written to make the programmer able to built a statemachine with code.
+In order to build state machines, `sm-py` parses configuration inputs given by the programmer. State machine is built when the programmer create a `StateMachine` object. Building a state machine is not a consideration for the user in `smpai`. However as a further step, a builder class will be written to make the programmer able to built a statemachine with code.
 
 
 ## Using Custom Actions
-`sm-py` provides an option for the programmer to use pre-written function in a state machine. In the configuration file, package, module and function name must be given to use a function as a executable object (`Action` or `Transition`) in the state machine
+`smpai` provides an option for the programmer to use pre-written function in a state machine. In the configuration file, package, module and function name must be given to use a function as a executable object (`Action` or `Transition`) in the state machine
 
 
 ## Running A State Machine
-For now there is only one type of a state machine in `sm-py` called `FiniteStateMachine`. In this type of state machine, transitions are triggered by events, therefore while running the state machine. User should send events to the state machine. Also there is an option such that the programmer checks if the incoming event triggers the state machine or not. 
+For now there is only one type of a state machine in `smpai` called `FiniteStateMachine`. In this type of state machine, transitions are triggered by events, therefore while running the state machine. User should send events to the state machine. Also there is an option such that the programmer checks if the incoming event triggers the state machine or not. 
