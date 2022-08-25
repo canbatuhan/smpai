@@ -34,7 +34,7 @@ For more complex state machines, using multiple configuration files would be mor
 
 
 ## Building In The Background
-In order to build state machines, `sm-py` parses configuration inputs given by the programmer. State machine is built when the programmer create a `StateMachine` object. Building a state machine is not a consideration for the user in `smpai`. However as a further step, a builder class will be written to make the programmer able to built a statemachine with code.
+In order to build state machines, `smpai` parses configuration inputs given by the programmer. State machine is built when the programmer create a `StateMachine` object. Building a state machine is not a consideration for the user in `smpai`. However as a further step, a builder class will be written to make the programmer able to built a statemachine with code.
 
 
 ## Using Custom Actions
