@@ -1,5 +1,7 @@
-from smpai.components import StateMachineContext, State, Listener, Transition
-from smpai.builder import StateMachineBuilder
+from .components.context import StateMachineContext
+from .components.transition import State, Transition
+from .components.listener import Listener
+from .builder.builder import StateMachineBuilder
 
 class FiniteStateMachine:
     """
@@ -81,14 +83,6 @@ class FiniteStateMachine:
         self.__context.set_current_state(state)
 
 
-    def __execute_before_transition(self):
-        pass
-
-
-    def __execute_after_transition(self):
-        pass
-
-
     def start(self) -> None:
         """
             Description:
@@ -131,9 +125,9 @@ class FiniteStateMachine:
                     transition = transition_
                     break
         
-        # If not found pass
-        # TODO : Some explanation is needed
-        if transition == None: pass
+        # If not found return
+        if transition == None:
+            return
 
         # If found, execute exit action
         state_actions = self.__context.get_current_state().get_actions()

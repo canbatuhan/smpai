@@ -2,16 +2,14 @@ from setuptools import setup
 
 setup(
     name='smpai',
-    version='0.1.0a2',    
+    version='0.1.1a1',    
     description='smpai - A State Machine Framework',
     url='https://github.com/canbatuhan/smpai',
     author='Batuhan Can',
     author_email='batuhanosmancan@gmail.com',
     license='MIT',
-    packages=['smpai'],
-
+    packages=['smpai', 'smpai.builder', 'smpai.components'],
     install_requires=[],
-
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Intended Audience :: Science/Research',

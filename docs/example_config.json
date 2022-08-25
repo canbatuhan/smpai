@@ -35,12 +35,7 @@
         {
             "id": "S_1",
             "entry_action": null,
-            "inner_action": {
-                "package": "tests",
-                "module": "sample_module",
-                "function": "play_secret_santa",
-                "params": ["name", "lucky_number", "probability"]
-            },
+            "inner_action": null,
             "exit_action": null
         },
 
