@@ -1,10 +1,5 @@
-from .components import (
-    StateMachineContext,
-    State,
-    Listener,
-    Transition,
-    StateMachineBuilder
-)
+from smpai.components import StateMachineContext, State, Listener, Transition
+from smpai.builder import StateMachineBuilder
 
 class FiniteStateMachine:
     """
