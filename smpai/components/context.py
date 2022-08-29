@@ -1,3 +1,4 @@
+from typing import Any
 from .transition import Transition, State
 
 
@@ -34,6 +35,12 @@ class StateMachineContext:
     def get_variables(self) -> dict: 
         return self.__variables
 
+    def get_variable(self, search_key) -> Any:
+        for key, value in self.__variables.items():
+            if search_key == key:
+                return value
+        return None
+
 
     """
         Setters
@@ -44,8 +51,11 @@ class StateMachineContext:
     def set_last_event(self, event:object) -> None:
         self.__last_event = event
 
-    def set_last_transition(self, transition) -> None:
+    def set_last_transition(self, transition:Transition) -> None:
         self.__last_transition = transition
 
     def set_variables(self, variables:dict) -> None:
         self.__variables = variables
+
+    def set_variable(self, key, value) -> None:
+        self.__variables.update({key: value})

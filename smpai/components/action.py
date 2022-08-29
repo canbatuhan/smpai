@@ -1,10 +1,7 @@
 import subprocess
 import json
+import ast
 
-# TODO : function executions must be more modular
-# TODO : params (state machine variables) can be updated
-# TODO : outputs (if there any) must be indicated
-# TODO : a .json format output might be required
 
 class Action:
     """
@@ -99,8 +96,8 @@ class Action:
         try:
             runner_command = self.__generate_command(keyword_arguments)
             raw_output = self.__run_command(runner_command)
-            raw_output = raw_output.replace('\'', '\"')
-            decoded_output = json.loads(raw_output)
+            output = ast.literal_eval(raw_output)
+            decoded_output = json.loads(json.dumps(output).replace("\'", "\""))
             return decoded_output
 
         except:
