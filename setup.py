@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='smpai',
-    version='0.1.2a0',    
+    version='0.1.2a1',    
     description='smpai - A State Machine Framework',
     url='https://github.com/canbatuhan/smpai',
     author='Batuhan Can',

@@ -41,8 +41,8 @@ class Transition:
     def get_action(self) -> Action:
         return self.__action
 
-    def execute(self, context) -> None:
+    def execute(self, context) -> dict:
         if self.__action != None:
             return_value = self.__action.execute(context)
-            print(return_value)
+            return return_value
     
