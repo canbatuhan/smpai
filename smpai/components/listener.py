@@ -69,4 +69,4 @@ class Listener():
                 variables stored in `StateMachineContext.
 
         """
-        self.__default_execution(transition)
+        #self.__default_execution(transition)
